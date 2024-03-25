@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,8 +19,16 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
-
 const db = getFirestore();
 
 const userCollection = collection(db, "user");
 const moduleCollection = collection(db, "module");
+
+async function getStudents() {
+  const q = query(userCollection, where("role", "==", "student"));
+  const querySnapshot = await getDocs(q);
+  const studentList = querySnapshot.docs.map(doc => doc.data());
+  return studentList;
+}
+
+getStudents().then(students => console.log(students));

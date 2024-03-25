@@ -5,6 +5,7 @@ module.exports = {
     entry: {
         script: './src/script.js',
         admin: './src/admin.js',
+        seeddata: './src/seeddata.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
