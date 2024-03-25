@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin: 8px;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #B38FB8;
+}
+
+.nav-left {
+    flex: 1;
+    text-align: left;
+}
+
+.nav-center {
+    flex: 1;
+    text-align: center;
+}
+
+.nav-right {
+    flex: 1;
+    text-align: right;
+}
+
+.main-nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.main-nav h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+#login-img {
+    width: 30px;
+    height: 30px;
+}
