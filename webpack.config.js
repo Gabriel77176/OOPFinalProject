@@ -4,6 +4,7 @@ module.exports = {
     mode: 'development',
     entry: {
         script: './src/script.js',
+        admin: './src/admin.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { addDoc } from "firebase/firestore";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,7 +19,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+initializeApp(firebaseConfig);
 
-console.log("Coucou les gens")
+const db = getFirestore();
+const userCollection = collection(db, "user");
+const moduleCollection = collection(db, "module");
+const eventCollection = collection(db, "event");
+const classCollection = collection(db, "class");
+const gradeCollection = collection(db, "grade");
+const classModuleCollection = collection(db, "class_module");
+const userModuleCollection = collection(db, "user_module");

@@ -17,7 +17,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+initializeApp(firebaseConfig);
 
-console.log("Coucou les gens")
+const db = getFirestore();
+
+const userCollection = collection(db, "user");
+const moduleCollection = collection(db, "module");
