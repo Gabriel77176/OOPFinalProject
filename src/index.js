@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,4 +21,30 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-console.log("Coucou les gens")
+const auth = getAuth();
+
+const debug_p = document.querySelector('#connect-p');
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, display the email
+    debug_p.innerHTML = "Connected As " + user.email;
+  } else {
+    // No user is signed in, display "non connecté"
+    debug_p.innerHTML = "non connecté";
+  }
+});
+
+const logoutButton = document.getElementById('logout');
+logoutButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  signOut(auth)
+      .then(() => {
+        console.log('User signed out');
+        // window.location.href = 'login.html';
+      })
+      .catch((error) => {
+        console.error('Error signing out: ', error);
+      });
+});

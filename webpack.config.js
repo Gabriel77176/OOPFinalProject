@@ -3,9 +3,10 @@ const path = require('path');
 module.exports = {
     mode: 'development',
     entry: {
-        script: './src/script.js',
+        index: './src/index.js',
         admin: './src/admin.js',
-        seeddata: './src/seeddata.js'
+        seeddata: './src/seeddata.js',
+        login: './src/login.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
