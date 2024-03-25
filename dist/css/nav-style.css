@@ -15,18 +15,21 @@ main {
 }
 
 .nav-left {
-    flex: 1;
-    text-align: left;
+    display: flex;
+    justify-content: center;
+    align-items: start;
 }
 
 .nav-center {
-    flex: 1;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav-right {
-    flex: 1;
-    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-nav a {

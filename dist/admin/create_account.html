@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account</title>
+</head>
+<body>
+    <form method="post" id="create-account-form">
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="text" name="phone_number" placeholder="Phone Number" required>
+        <select name="role">
+            <option value="student">Student</option>
+            <option value="lecturer">Lecturer</option>
+        </select>
+        <select name="class">
+            <option value="0">No class</option>
+        </select>
+        <input type="submit" value="Create Account">
+    </form>
+
+    <script src="../bundles/admin_create_account.bundle.js"></script>
+</body>
+</html>

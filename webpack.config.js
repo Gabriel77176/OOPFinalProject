@@ -6,7 +6,8 @@ module.exports = {
         index: './src/index.js',
         admin: './src/admin.js',
         seeddata: './src/seeddata.js',
-        login: './src/login.js'
+        login: './src/login.js',
+        admin_create_account: './src/admin_create_account.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

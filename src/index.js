@@ -28,10 +28,10 @@ const debug_p = document.querySelector('#connect-p');
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, display the email
-    debug_p.innerHTML = "Connected As " + user.email;
+    debug_p.innerHTML = user.email;
   } else {
     // No user is signed in, display "non connecté"
-    debug_p.innerHTML = "non connecté";
+    debug_p.innerHTML = "Not Connected";
   }
 });
 
