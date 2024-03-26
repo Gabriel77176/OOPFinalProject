@@ -1,11 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import {
-    getAuth,
+import { getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged
 } from "firebase/auth";
-import {collection, getDoc, getDocs, getFirestore, query, where} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, getFirestore, query, where} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4",
@@ -23,30 +22,22 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth();
 
-const userModuleCollection = collection(db, 'user_module');
+const userModuleCollection = collection(db, 'class_module');
 
-let currentUser = null;
-
-onAuthStateChanged(auth, user => {
-    if (user) {
-        currentUser = user;
-    } else {
-        console.log('No user is signed in');
-    }
-});
+let globalUser = null;
 
 async function isConnected() {
     return new Promise((resolve, reject) => {
-        while (currentUser) {
-            resolve(currentUser);
+        while (globalUser) {
+            resolve(globalUser);
         }
     });
 }
 
 async function getUser() {
     return new Promise((resolve, reject) => {
-        if (currentUser) {
-            const q = query(collection(db, "user"), where("auth_id", "==", currentUser.uid));
+        if (globalUser) {
+            const q = query(collection(db, "user"), where("auth_id", "==", globalUser.uid));
 
             getDocs(q).then(querySnapshot => {
                 if (!querySnapshot.empty) {
@@ -106,25 +97,37 @@ detailsButton.addEventListener("click", async () => {
     window.location.href = urlObject.toString();
 });
 
-const modulesDiv = document.getElementById("modules");
-modulesDiv.innerHTML = "";
 
-const user = await getUser();
-const userModules = await getUserModules(user.data().class_id);
+onAuthStateChanged(auth, async user2 => {
+    if (user2) {
+        globalUser = user2;
+        const modulesDiv = document.getElementById("modules");
+        modulesDiv.innerHTML = "";
 
-userModules.forEach(async userModule => {
-    const module = await getDoc(userModule.data().module_id);
-
-    const moduleA = document.createElement("a");
-    moduleA.href = "#";
-    moduleA.addEventListener("click", async () => {
-        await goToModule(module.id);
-    });
-    const moduleDiv = document.createElement("div");
-    moduleDiv.classList.add("module");
-    moduleDiv.innerHTML = `
+        const user = await getUser();
+        const userModulesSnapshot = await getUserModules(user.data().class_id);
+        console.log(user.data().class_id)
+        const userModules = userModulesSnapshot.docs;
+        console.log(userModules.length)
+        for (const userModule of userModules) {
+            const moduleRef = doc(db, 'module', userModule.data().module_id);
+            const module = await getDoc(moduleRef);
+            const moduleA = document.createElement("a");
+            moduleA.href = "#";
+            moduleA.addEventListener("click", async () => {
+                await goToModule(module.id);
+            });
+            const moduleDiv = document.createElement("div");
+            moduleDiv.classList.add("module");
+            moduleDiv.innerHTML = `
         <h2>${module.data().name}</h2>
         <p>${"Lorem Ipsum"}</p>
     `;
-    modulesDiv.appendChild(moduleDiv);
+            moduleA.appendChild(moduleDiv);
+            modulesDiv.appendChild(moduleA);
+
+        }
+    } else {
+        console.log('No user is signed in');
+    }
 });
