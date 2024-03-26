@@ -2,18 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Module</title>
+    <link rel="stylesheet" href="css/create_module.css">
 </head>
 <body>
-    <h1>Create Module</h1>
+    <nav class="main-nav">
+        <div class="nav-left centered">
+            <h1>OOP Final Exam</h1>
+        </div>
+        <div class="nav-center centered">
+            <a href="index.html">Home</a>
+            <a href="create_account.html">Create Account</a>
+            <a href="create_class.html">Create Class</a>
+            <a href="create_module.html">Create Module</a>
+        </div>
+        <div class="nav-right centered">
+            <span id="connect-p"></span>
+            <a href="../login.html"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="overlay"></div>
+            <h1>Create Module</h1>
 
-    <form method="post" id="create-module-form">
-        <input type="text" name="name" placeholder="Module Name" required>
-        <input type="number" name="coef" placeholder="1" min="0" step="0.25" required>
-        <input type="submit" value="Create Module">
+            <form method="post" id="create-module-form">
+                <div>
+                    <label for="class">Class Name :</label>
+                    <input type="text" name="name" placeholder="Class Name" required>
+                </div>
+                <div>
+                    <label for="coef">Coef :</label>
+                    <input type="number" name="coef" placeholder="1" min="0" step="0.25" required>
+                </div>
+                <div>
+                    <input type="submit" value="Create Module" class="create-module-btn">
+                </div>
 
-    </form>
+            </form>
+        </div>
 
-    <script src="../bundles/admin_create_module.bundle.js"></script>
+        <script src="../bundles/admin_create_module.bundle.js"></script>
+    </main>
 </body>
 </html>

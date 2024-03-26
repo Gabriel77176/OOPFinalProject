@@ -2,17 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create Module</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Class</title>
+    <link rel="stylesheet" href="css/create_class.css">
 </head>
 <body>
-    <h1>Create Module</h1>
+    <nav class="main-nav">
+        <div class="nav-left centered">
+            <h1>OOP Final Exam</h1>
+        </div>
+        <div class="nav-center centered">
+            <a href="index.html">Home</a>
+            <a href="create_account.html">Create Account</a>
+            <a href="create_class.html">Create Class</a>
+            <a href="create_module.html">Create Module</a>
+        </div>
+        <div class="nav-right centered">
+            <span id="connect-p"></span>
+            <a href="../login.html"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="overlay"></div>
+            <h1>Create Module</h1>
 
-    <form method="post" id="create-class-form">
-        <input type="text" name="name" placeholder="Class Name" required>
-        <input type="submit" value="Create Class">
+            <form method="post" id="create-class-form">
+                <div>
+                    <label for="new_class">New Class :</label>
+                    <input type="text" name="name" placeholder="Class Name" required>
+                </div>
+                <div>
+                    <input type="submit" value="Create Class" class="create-class-btn">
+                </div>
 
-    </form>
+            </form>
+        </div>
 
-    <script src="../bundles/admin_create_class.bundle.js"></script>
+        <script src="../bundles/admin_create_class.bundle.js"></script>
+    </main>
 </body>
 </html>
