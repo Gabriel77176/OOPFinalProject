@@ -11,6 +11,7 @@ module.exports = {
         admin_create_module: './src/admin_create_module.js',
         admin_create_class: './src/admin_create_class.js',
         admin_add_teacher_module: './src/admin_add_teacher_module.js',
+        student: './src/student.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

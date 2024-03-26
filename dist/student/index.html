@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="css/nav-style.css">
+    <link rel="stylesheet" href="../css/nav-style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/account.css">
 </head>
 <body>
     <nav class="main-nav">
@@ -18,29 +20,34 @@
             <a href="#">Page 3</a>
         </div>
         <div class="nav-right centered">
-            <span id="connect-p"></span>
-            <a href="login.html"><img id="login-img" src="img/icons/user-regular.svg" alt="LOGIN"></a>
+            <span>Student</span>
+            <a href="./index.html"><img id="login-img" src="../img/icons/user-regular.svg" alt=""></a>
         </div>
     </nav>
     <main>
-        <h1>Title</h1>
-
-        <a href="login.html">LOGIN</a>
-        <a href="#" id="logout">LOGOUT</a>
-        <br>
-        <a href="admin/create_account.html">CREATE USER</a>
-        <br>
-        <a href="admin/create_module.html">CREATE MODULE</a>
-        <br>
-        <a href="admin/create_class.html">CREATE CLASS</a>
-        <br>
-        <form id="form_class">
-            <select name="class_id" id="form_class_select">
-            </select>
-            <input type="submit" value="Add User to Class">
-        </form>
-        <script src="bundles/index.bundle.js"></script>
-        <script src="bundles/admin.bundle.js"></script>
+        <div class="container">
+            <div class="overlay"></div>
+            <h1>Personnel Informations</h1>
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td id="first-name"></td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td id="last-name"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td id="email"></td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td id="phone"></td>
+                </tr>
+            </table>
+        </div>
+        <script src="../bundles/student.bundle.js"></script>
     </main>
 </body>
 </html>

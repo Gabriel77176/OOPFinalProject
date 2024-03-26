@@ -1,0 +1,15 @@
+.personalInfo {
+  background-color: #f1f1f1;
+  padding: 20px;
+  margin-top: 20px;
+  margin-right: ;
+  border-radius: 5px;
+}
+
+.first-name, .last-name, .email, .phone {
+  display: flex;
+}
+
+.space{
+    margin-right: 10px;
+}
