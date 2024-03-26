@@ -33,9 +33,12 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, display the email
     debug_p.innerHTML = user.email;
+    console.log("connecté");
   } else {
     // No user is signed in, display "non connecté"
     debug_p.innerHTML = "Not Connected";
+    console.log("non connecté");
+
   }
 });
 
