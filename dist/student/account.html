@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/account.css">
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-left centered">
+            <h1>OOP Final Exam</h1>
+        </div>
+        <div class="nav-center centered">
+            <a href="index.html">Home</a>
+            <a href="account.html">Account</a>
+            <a href="#">Grade</a>
+            <a href="#">Exam</a>
+        </div>
+        <div class="nav-right centered">
+            <span id="connect-p"></span>
+            <a href="../login.html"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="overlay"></div>
+            <h1>Personnel Informations</h1>
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td>John</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>Doe</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>john.doe@example.com</td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>123-456-7890</td>
+                </tr>
+                <tr>
+                    <td>Class</td>
+                    <td>Mathematics</td>
+                </tr>
+            </table>
+            <button onclick="modifierInformations()" class="modifier-btn">Modification</button>
+        </div>
+        
+
+
+        <script src="bundles/index.bundle.js"></script>
+        <script src="bundles/admin.bundle.js"></script>
+    </main>
+</body>
+</html>
