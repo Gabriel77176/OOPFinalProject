@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="css/account.css">
 </head>
-<body>
+<body style="background-image: url('img/imageback.jpg');">
     <nav class="main-nav">
         <div class="nav-left centered">
             <h1>OOP Final Exam</h1>
@@ -26,30 +26,30 @@
     <main>
         <div class="container">
             <div class="overlay"></div>
-            <h1>Personnel Informations</h1>
-            <table>
-                <tr>
-                    <td>First Name</td>
-                    <td>John</td>
-                </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td>Doe</td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td>john.doe@example.com</td>
-                </tr>
-                <tr>
-                    <td>Phone Number</td>
-                    <td>123-456-7890</td>
-                </tr>
-                <tr>
-                    <td>Class</td>
-                    <td>Mathematics</td>
-                </tr>
-            </table>
-            <button onclick="modifierInformations()" class="modifier-btn">Modification</button>
+            <h1>Personnal Informations</h1>
+            <div class="info-table">
+                <div class="info-row">
+                    <span class="info-label">First Name:</span>
+                    <span class="info-value">John</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Last Name:</span>
+                    <span class="info-value">Doe</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">john.doe@example.com</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Phone Number:</span>
+                    <span class="info-value">123-456-7890</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Class :</span>
+                    <span class="info-value">Mathematics</span>
+                </div>
+            </div>
+            <button onclick="modifierInformations()" class="modifier-btn">Modify Infomation</button>
         </div>
         
 
