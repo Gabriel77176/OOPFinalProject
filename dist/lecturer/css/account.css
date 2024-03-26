@@ -1,30 +1,41 @@
+/* Styles pour le formulaire de création de compte */
 body {
     margin: 0;
     padding: 0;
-}
-
-main {
-    margin: 8px;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .main-nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 20px;
-    background-color: #B38FB8;
+    background-color: #18534F; /* Nouvelle couleur de la barre de navigation */
+    color: #000; /* Nouvelle couleur du texte de la barre de navigation */
 }
 
-.nav-left {
-    display: flex;
-    justify-content: center;
-    align-items: start;
+.main-nav h1 {
+    color: #FFF; /* Couleur du texte du titre */
 }
 
-.nav-center {
+.main-nav a {
+    text-decoration: none;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.main-nav .nav-center {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centrer horizontalement les éléments */
     align-items: center;
 }
+
+.main-nav .nav-center a {
+    margin: 0 10px; /* Espace entre les liens */
+}
+
 
 .nav-right {
     display: flex;
@@ -32,63 +43,69 @@ main {
     align-items: center;
 }
 
-.main-nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: #333;
-}
-
-.main-nav h1 {
-    margin: 0;
-    font-size: 1.5em;
-}
-
 #login-img {
     width: 30px;
     height: 30px;
+    margin-right: 5px; /* Ajout d'une marge à droite pour espacer le bouton de l'image */
+}
+
+#login-button-container {
+    margin-right: -5px; /* Décalage légèrement vers la gauche */
 }
 
 .container {
-    position: relative;
+    margin: 100px auto; /* Centrer le contenu verticalement */
+    max-width: 600px; /* Limite de la largeur du conteneur */
+    padding: 20px;
+    background-color: #ECF8F6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.overlay {
-    position: fixed;
-    top: 52%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 80%;
-    background-color: #D9D9D9; /* Couleur grise semi-transparente */
-    z-index: -1; /* Assure que la superposition est en arrière-plan */
-}
-
-table {
-    border-collapse: collapse;
-    width: 30%;
-    margin: 0 auto;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 12px; /* Augmenter le padding pour augmenter la taille de la cellule */
-    text-align: left;
-    font-size: 18px; /* Augmenter la taille du texte */
-  }
-  
-  h1 {
+h1 {
     text-align: center;
-    font-size: 28px; /* Taille du texte */
-    margin-top: 38px; /* Ajouter une marge supérieure pour déplacer le titre vers le bas */
-  }
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #226D68; /* Nouvelle couleur du titre */
+}
 
-  .modifier-btn {
+.info-table {
+    margin: 0 auto; /* Centrer la table */
+    width: 70%; /* Largeur de la table */
+    padding: 20px;
+    background-color: #FEEAA1; /* Nouvelle couleur du carré */
+    border-radius: 8px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #18534F; /* Nouvelle couleur du texte des labels */
+}
+
+.info-value {
+    color: #D6955B;
+}
+
+.modifier-btn {
     display: block;
-    margin: 20px auto;
+    margin: 20px auto; /* Centrer le bouton */
     padding: 10px 20px;
-    background-color: #C5E0B5;
+    background-color: #C5E0B5; /* Nouvelle couleur du bouton */
     border: none;
     color: #000;
     font-size: 16px;
     cursor: pointer;
-  }
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.modifier-btn:hover {
+    background-color: #18534F; /* Couleur au survol du bouton */
+    color: #fff;
+}
