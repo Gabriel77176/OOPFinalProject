@@ -27,15 +27,14 @@ let module_id = params.get("module_id");
 console.log(module_id);
 
 const moduleCollection = collection(db, "module");
-const userCollection = collection(db, "user");
-const userModuleCollection = collection(db, "user_module");
+const classCollection = collection(db, "class");
+const classModuleCollection = collection(db, "class_module");
 
 let moduleDocRef = doc(db, "module", module_id);
 let moduleData;
 
 await getDoc(moduleDocRef).then((docSnapshot) => {
     if (docSnapshot.exists()) {
-        // The document exists, store its data in a variable
         moduleData = docSnapshot.data();
         console.log(moduleData);
     } else {
@@ -48,40 +47,36 @@ await getDoc(moduleDocRef).then((docSnapshot) => {
 let h1_module_name = document.querySelector("#h1-module-name");
 h1_module_name.innerHTML = moduleData.name;
 
-getDocs(userCollection).then((querySnapshot) => {
+getDocs(classCollection).then((querySnapshot) => {
     const tbody = document.querySelector('#tbody-users');
 
     querySnapshot.forEach((docu) => {
-        if (docu.data().role === 'lecturer') {
-            let row = document.createElement('tr');
+        let row = document.createElement('tr');
 
-            let nameCell = document.createElement('td');
-            nameCell.textContent = docu.data().firstName + ' ' + docu.data().lastName;
-            row.appendChild(nameCell);
+        let nameCell = document.createElement('td');
+        nameCell.textContent = docu.data().name;
+        row.appendChild(nameCell);
 
-            let roleCell = document.createElement('td');
-            let checkbox = document.createElement('input');
-            checkbox.type = "checkbox";
-            checkbox.name = "student";
-            checkbox.value = docu.id;
+        let roleCell = document.createElement('td');
+        let checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.name = "class";
+        checkbox.value = docu.id;
 
-            // Check if a document exists in the user_module collection with module_id = module_id and user_id = current user's id
+        const q = query(classModuleCollection, where("module_id", "==", module_id), where("class_id", "==", docu.id));
 
-            const q = query(userModuleCollection, where("module_id", "==", module_id), where("user_id", "==", docu.id));
-
-            getDocs(q).then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    checkbox.checked = true;
-                });
-            }).catch((error) => {
-                console.log("Error getting documents: ", error);
+        getDocs(q).then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                checkbox.checked = true;
             });
+        }).catch((error) => {
+            console.log("Error getting documents:  ", error);
+        });
 
-            roleCell.appendChild(checkbox);
-            row.appendChild(roleCell);
+        roleCell.appendChild(checkbox);
+        row.appendChild(roleCell);
 
-            tbody.appendChild(row);
-        }
+        tbody.appendChild(row);
     });
 });
 
@@ -89,7 +84,7 @@ async function isModuleThere(module_id, checkbox) {
     return new Promise((resolve, reject) => {
         let is_there = false;
 
-        const q = query(userModuleCollection, where("module_id", "==", module_id), where("user_id", "==", checkbox.value));
+        const q = query(classModuleCollection, where("module_id", "==", module_id), where("class_id", "==", checkbox.value));
 
         getDocs(q).then((querySnapshot) => {
             querySnapshot.forEach((docu) => {
@@ -104,7 +99,7 @@ async function isModuleThere(module_id, checkbox) {
     });
 }
 
-let form = document.querySelector("#add-teacher-module-form");
+let form = document.querySelector("#add-class-module-form");
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -115,7 +110,7 @@ form.addEventListener("submit", async (event) => {
         if (checkbox.checked === false) {
             let userId = checkbox.value;
 
-            const q = query(userModuleCollection, where("module_id", "==", module_id), where("user_id", "==", checkbox.value));
+            const q = query(classModuleCollection, where("module_id", "==", module_id), where("class_id", "==", checkbox.value));
 
             getDocs(q).then((querySnapshot) => {
                 querySnapshot.forEach((docu) => {
@@ -134,8 +129,8 @@ form.addEventListener("submit", async (event) => {
 
             if (is_there === false) {
                 console.log("Verification")
-                addDoc(userModuleCollection, {
-                    user_id: checkbox.value,
+                addDoc(classModuleCollection, {
+                    class_id: checkbox.value,
                     module_id: module_id
                 }).then((docRef) => {
                     console.log("Document written with ID: ", docRef.id);
