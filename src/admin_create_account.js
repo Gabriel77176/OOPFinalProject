@@ -5,7 +5,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword, signOut
 } from "firebase/auth";
-import {addDoc, collection, getFirestore} from "firebase/firestore";
+import {addDoc, collection, getDocs, getFirestore} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4",
@@ -24,6 +24,7 @@ const auth = getAuth();
 const db = getFirestore();
 
 const userCollection = collection(db, "user");
+const classCollection = collection(db, "class");
 
 async function createUser(firstName, lastName, role, phoneNumber, email, password, class_id, auth_id) {
     return new Promise(async (resolve, reject) => {
@@ -87,3 +88,22 @@ createAccountForm.addEventListener('submit', (e) => {
         });
 });
 
+async function getClasses() {
+    const querySnapshot = await getDocs(classCollection);
+    const classes = querySnapshot.docs.map(doc => doc.data());
+    return classes;
+}
+
+getClasses().then(classes => {
+    const classSelect = document.querySelector("#class-select");
+    if (classes.length > 0)
+    {
+        classSelect.innerHTML = "";
+    }
+    classes.forEach(classItem => {
+        const option = document.createElement('option');
+        option.value = classItem.id; // Assuming each class has an id
+        option.text = classItem.name; // Assuming each class has a name
+        classSelect.add(option);
+    });
+});

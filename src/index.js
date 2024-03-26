@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
+import {collection, getDocs, getFirestore} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,6 +23,9 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 const auth = getAuth();
+const db = getFirestore();
+
+const moduleCollection = collection(db, 'module');
 
 const debug_p = document.querySelector('#connect-p');
 
@@ -47,4 +51,42 @@ logoutButton.addEventListener('click', (e) => {
       .catch((error) => {
         console.error('Error signing out: ', error);
       });
+});
+
+const moduleForm = document.querySelector("#form_module");
+moduleForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const classSelect = document.querySelector('select[name="class_id"]');
+  const selectedId = classSelect.value;
+
+// Obtenir l'URL actuelle
+  let currentUrl = new URL(window.location.href);
+
+// Obtenir le chemin de base de l'URL actuelle
+  let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\/[^/]+$/, '/');
+
+// Créer une nouvelle URL en combinant le chemin de base et le chemin relatif
+  let newRelativeUrl = "admin/add_teacher_module.html";
+  let newUrl = baseUrl + newRelativeUrl;
+
+// Créer un nouvel objet URL pour faciliter la gestion des paramètres de requête
+  let urlObject = new URL(newUrl);
+
+// Ajouter des paramètres de requête à la nouvelle URL
+  urlObject.searchParams.append('class_id', selectedId);
+
+// Rediriger vers la nouvelle URL
+  window.location.href = urlObject.toString();
+});
+
+getDocs(moduleCollection).then((querySnapshot) => {
+  const classSelect = document.querySelector("#form_class_select");
+
+  querySnapshot.forEach((doc) => {
+    let option = document.createElement('option');
+    option.value = doc.id;
+    option.text = doc.data().name;
+    classSelect.add(option);
+  });
 });

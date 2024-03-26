@@ -7,7 +7,10 @@ module.exports = {
         admin: './src/admin.js',
         seeddata: './src/seeddata.js',
         login: './src/login.js',
-        admin_create_account: './src/admin_create_account.js'
+        admin_create_account: './src/admin_create_account.js',
+        admin_create_module: './src/admin_create_module.js',
+        admin_create_class: './src/admin_create_class.js',
+        admin_add_teacher_module: './src/admin_add_teacher_module.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

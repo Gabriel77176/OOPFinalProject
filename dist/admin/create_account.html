@@ -5,6 +5,7 @@
     <title>Create Account</title>
 </head>
 <body>
+    <h1>Create Account</h1>
     <form method="post" id="create-account-form">
         <input type="text" name="first_name" placeholder="First Name" required>
         <input type="text" name="last_name" placeholder="Last Name" required>
@@ -15,8 +16,8 @@
             <option value="student">Student</option>
             <option value="lecturer">Lecturer</option>
         </select>
-        <select name="class">
-            <option value="0">No class</option>
+        <select name="class" id="class-select">
+            <option value="no-class">No class</option>
         </select>
         <input type="submit" value="Create Account">
     </form>

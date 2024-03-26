@@ -50,13 +50,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/admin_create_account.js":
-/*!*************************************!*\
-  !*** ./src/admin_create_account.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/admin_add_teacher_class.js":
+/*!****************************************!*\
+  !*** ./src/admin_add_teacher_class.js ***!
+  \****************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4\",\r\n    authDomain: \"oopfinalproject-1ad78.firebaseapp.com\",\r\n    projectId: \"oopfinalproject-1ad78\",\r\n    storageBucket: \"oopfinalproject-1ad78.appspot.com\",\r\n    messagingSenderId: \"10697858559\",\r\n    appId: \"1:10697858559:web:0eea452e24f9883f6e9bca\",\r\n    measurementId: \"G-2ZS6JBKR21\"\r\n};\r\n\r\n// Initialize Firebase\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)();\r\n\r\nconst userCollection = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"user\");\r\nconst classCollection = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"class\");\r\n\r\nasync function createUser(firstName, lastName, role, phoneNumber, email, password, class_id, auth_id) {\r\n    return new Promise(async (resolve, reject) => {\r\n        try {\r\n            const docRef = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.addDoc)(userCollection, {\r\n                firstName: firstName,\r\n                lastName: lastName,\r\n                role: role,\r\n                phoneNumber: phoneNumber,\r\n                email: email,\r\n                class_id: class_id,\r\n                auth_id: auth_id\r\n            });\r\n            console.log(\"User created with ID: \", docRef.id);\r\n            resolve(docRef.id);\r\n        } catch (e) {\r\n            console.error(\"Error adding document: \", e);\r\n            reject(e);\r\n        }\r\n    });\r\n}\r\n\r\n\r\nconst createAccountForm = document.querySelector(\"#create-account-form\");\r\ncreateAccountForm.addEventListener('submit', (e) => {\r\n    e.preventDefault();\r\n\r\n    const firstName = createAccountForm.first_name.value;\r\n    const lastName = createAccountForm.last_name.value;\r\n    const role = createAccountForm.role.value;\r\n    const phoneNumber = createAccountForm.phone_number.value;\r\n    const email = createAccountForm.email.value;\r\n    const password = createAccountForm.password.value;\r\n    const class_id = createAccountForm.class.value;\r\n\r\n    console.log(firstName, lastName, role, phoneNumber, email, password);\r\n\r\n    (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.createUserWithEmailAndPassword)(auth, email, password)\r\n        .then((userCredential) => {\r\n            // The user has been created and signed in\r\n            console.log('User created: ', userCredential.user)\r\n            createUser(firstName, lastName, role, phoneNumber, email, password, class_id, userCredential.user.uid)\r\n                .then(() => {\r\n                    console.log(\"User Created\")\r\n                    ;(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signOut)(auth)\r\n                        .then(() => {\r\n                        console.log('User signed out');\r\n                        createAccountForm.reset();\r\n                        })\r\n                        .catch((error) => {\r\n                            console.error('Error signing out: ', error);\r\n                        });\r\n\r\n                })\r\n                .catch((err) =>\r\n                    console.log(err.message)\r\n                );\r\n        })\r\n        .catch((error) => {\r\n            console.error('Error creating user: ', error);\r\n        });\r\n});\r\n\r\nasync function getClasses() {\r\n    const querySnapshot = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(classCollection);\r\n    const classes = querySnapshot.docs.map(doc => doc.data());\r\n    return classes;\r\n}\r\n\r\ngetClasses().then(classes => {\r\n    const classSelect = document.querySelector(\"#class-select\");\r\n    if (classes.length > 0)\r\n    {\r\n        classSelect.innerHTML = \"\";\r\n    }\r\n    classes.forEach(classItem => {\r\n        const option = document.createElement('option');\r\n        option.value = classItem.id; // Assuming each class has an id\r\n        option.text = classItem.name; // Assuming each class has a name\r\n        classSelect.add(option);\r\n    });\r\n});\n\n//# sourceURL=webpack:///./src/admin_create_account.js?");
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\n\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4\",\r\n    authDomain: \"oopfinalproject-1ad78.firebaseapp.com\",\r\n    projectId: \"oopfinalproject-1ad78\",\r\n    storageBucket: \"oopfinalproject-1ad78.appspot.com\",\r\n    messagingSenderId: \"10697858559\",\r\n    appId: \"1:10697858559:web:0eea452e24f9883f6e9bca\",\r\n    measurementId: \"G-2ZS6JBKR21\"\r\n};\r\n\r\n// Initialize Firebase\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)();\r\n\r\nlet params = new URLSearchParams(window.location.search);\r\nlet class_id = params.get(\"class_id\");\r\nconsole.log(class_id);\r\n\r\nconst moduleCollection = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"module\");\r\nconst userCollection = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"user\");\r\n\r\nlet classDocRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)(db, \"class\", class_id);\r\nlet classData;\r\n\r\nawait (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDoc)(classDocRef).then((docSnapshot) => {\r\n    if (docSnapshot.exists()) {\r\n        // The document exists, store its data in a variable\r\n        classData = docSnapshot.data();\r\n        console.log(classData);\r\n    } else {\r\n        alert(\"No such document!\")\r\n    }\r\n}).catch((error) => {\r\n    console.log(\"Error getting document:\", error);\r\n});\r\n\r\nlet h1_class_name = document.querySelector(\"#h1-class-name\");\r\nh1_class_name.innerHTML = classData.name;\r\n\r\n(0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(userCollection).then((querySnapshot) => {\r\n    const tbody = document.querySelector('#tbody-users');\r\n\r\n    querySnapshot.forEach((doc) => {\r\n        if (doc.data().role === 'lecturer') {\r\n            let row = document.createElement('tr');\r\n\r\n            let nameCell = document.createElement('td');\r\n            nameCell.textContent = doc.data().firstName + ' ' + doc.data().lastName;\r\n            row.appendChild(nameCell);\r\n\r\n            let roleCell = document.createElement('td');\r\n            let checkbox = document.createElement('input');\r\n            checkbox.type = \"checkbox\";\r\n            checkbox.name = \"student\";\r\n            if (doc.data().class_id === class_id) {\r\n                checkbox.checked = true;\r\n            }\r\n            roleCell.appendChild(checkbox);\r\n            row.appendChild(roleCell);\r\n\r\n            tbody.appendChild(row);\r\n        }\r\n    });\r\n});\r\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack:///./src/admin_add_teacher_class.js?");
 
 /***/ }),
 
@@ -187,6 +187,75 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
+/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
+/******/ 		var resolveQueue = (queue) => {
+/******/ 			if(queue && queue.d < 1) {
+/******/ 				queue.d = 1;
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 				if(dep[webpackQueues]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					var queue = [];
+/******/ 					queue.d = 0;
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						resolveQueue(queue);
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						resolveQueue(queue);
+/******/ 					});
+/******/ 					var obj = {};
+/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			var ret = {};
+/******/ 			ret[webpackQueues] = x => {};
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
+/******/ 		}));
+/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
+/******/ 			var queue;
+/******/ 			hasAwait && ((queue = []).d = -1);
+/******/ 			var depQueues = new Set();
+/******/ 			var exports = module.exports;
+/******/ 			var currentDeps;
+/******/ 			var outerResolve;
+/******/ 			var reject;
+/******/ 			var promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = resolve;
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 			module.exports = promise;
+/******/ 			body((deps) => {
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				var fn;
+/******/ 				var getResult = () => (currentDeps.map((d) => {
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
+/******/ 				var promise = new Promise((resolve) => {
+/******/ 					fn = () => (resolve(getResult));
+/******/ 					fn.r = 0;
+/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 				});
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
+/******/ 			queue && queue.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -232,7 +301,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/admin_create_account.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/admin_add_teacher_class.js");
 /******/ 	
 /******/ })()
 ;
