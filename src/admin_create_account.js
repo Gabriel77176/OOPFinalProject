@@ -90,7 +90,7 @@ createAccountForm.addEventListener('submit', (e) => {
 
 async function getClasses() {
     const querySnapshot = await getDocs(classCollection);
-    const classes = querySnapshot.docs.map(doc => doc.data());
+    const classes = querySnapshot.docs.map(doc => doc);
     return classes;
 }
 
@@ -102,8 +102,8 @@ getClasses().then(classes => {
     }
     classes.forEach(classItem => {
         const option = document.createElement('option');
-        option.value = classItem.id; // Assuming each class has an id
-        option.text = classItem.name; // Assuming each class has a name
+        option.value = classItem.id;
+        option.text = classItem.data().name;
         classSelect.add(option);
     });
 });
