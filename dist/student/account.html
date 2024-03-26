@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../css/nav-style.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/account.css">
+    <link rel="stylesheet" href="css/account.css">
 </head>
 <body>
     <nav class="main-nav">
@@ -15,13 +13,14 @@
             <h1>OOP Final Exam</h1>
         </div>
         <div class="nav-center centered">
-            <a href="#">Page 1</a>
-            <a href="#">Page 2</a>
-            <a href="#">Page 3</a>
+            <a href="index.html">Home</a>
+            <a href="account.html">Account</a>
+            <a href="#">Grade</a>
+            <a href="#">Exam</a>
         </div>
         <div class="nav-right centered">
-            <span>Student</span>
-            <a href="./index.html"><img id="login-img" src="../img/icons/user-regular.svg" alt=""></a>
+            <span id="connect-p"></span>
+            <a href="../login.html"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
         </div>
     </nav>
     <main>
@@ -31,23 +30,32 @@
             <table>
                 <tr>
                     <td>First Name</td>
-                    <td id="first-name"></td>
+                    <td>John</td>
                 </tr>
                 <tr>
                     <td>Last Name</td>
-                    <td id="last-name"></td>
+                    <td>Doe</td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td id="email"></td>
+                    <td>john.doe@example.com</td>
                 </tr>
                 <tr>
                     <td>Phone Number</td>
-                    <td id="phone"></td>
+                    <td>123-456-7890</td>
+                </tr>
+                <tr>
+                    <td>Class</td>
+                    <td>Mathematics</td>
                 </tr>
             </table>
+            <button onclick="modifierInformations()" class="modifier-btn">Modification</button>
         </div>
-        <script src="../bundles/student.bundle.js"></script>
+        
+
+
+        <script src="bundles/index.bundle.js"></script>
+        <script src="bundles/admin.bundle.js"></script>
     </main>
 </body>
 </html>
