@@ -57,36 +57,28 @@ const moduleForm = document.querySelector("#form_module");
 moduleForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const classSelect = document.querySelector('select[name="class_id"]');
-  const selectedId = classSelect.value;
+  const moduleSelect = document.querySelector('select[name="module_id"]');
+  const selectedId = moduleSelect.value;
 
-// Obtenir l'URL actuelle
   let currentUrl = new URL(window.location.href);
-
-// Obtenir le chemin de base de l'URL actuelle
   let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\/[^/]+$/, '/');
 
-// Créer une nouvelle URL en combinant le chemin de base et le chemin relatif
   let newRelativeUrl = "admin/add_teacher_module.html";
   let newUrl = baseUrl + newRelativeUrl;
 
-// Créer un nouvel objet URL pour faciliter la gestion des paramètres de requête
   let urlObject = new URL(newUrl);
 
-// Ajouter des paramètres de requête à la nouvelle URL
-  urlObject.searchParams.append('class_id', selectedId);
-
-// Rediriger vers la nouvelle URL
+  urlObject.searchParams.append('module_id', selectedId);
   window.location.href = urlObject.toString();
 });
 
 getDocs(moduleCollection).then((querySnapshot) => {
-  const classSelect = document.querySelector("#form_class_select");
+  const moduleSelect = document.querySelector("#form_module_select");
 
   querySnapshot.forEach((doc) => {
     let option = document.createElement('option');
     option.value = doc.id;
     option.text = doc.data().name;
-    classSelect.add(option);
+    moduleSelect.add(option);
   });
 });
