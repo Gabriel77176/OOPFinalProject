@@ -56,8 +56,8 @@ logoutButton.addEventListener('click', (e) => {
       });
 });
 
-const moduleForm = document.querySelector("#form_module");
-moduleForm.addEventListener('submit', (event) => {
+const userModuleForm = document.querySelector("#form_teacher_module");
+userModuleForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
   const moduleSelect = document.querySelector('select[name="module_id"]');
@@ -75,8 +75,38 @@ moduleForm.addEventListener('submit', (event) => {
   window.location.href = urlObject.toString();
 });
 
+const classModuleForm = document.querySelector("#form_class_module");
+classModuleForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const moduleSelect = document.querySelector('select[name="module_id"]');
+  const selectedId = moduleSelect.value;
+
+  let currentUrl = new URL(window.location.href);
+  let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\/[^/]+$/, '/');
+
+  let newRelativeUrl = "admin/add_class_module.html";
+  let newUrl = baseUrl + newRelativeUrl;
+
+  let urlObject = new URL(newUrl);
+
+  urlObject.searchParams.append('module_id', selectedId);
+  window.location.href = urlObject.toString();
+});
+
 getDocs(moduleCollection).then((querySnapshot) => {
-  const moduleSelect = document.querySelector("#form_module_select");
+  const moduleSelect = document.querySelector("#form_teacher_module_select");
+
+  querySnapshot.forEach((doc) => {
+    let option = document.createElement('option');
+    option.value = doc.id;
+    option.text = doc.data().name;
+    moduleSelect.add(option);
+  });
+});
+
+getDocs(moduleCollection).then((querySnapshot) => {
+  const moduleSelect = document.querySelector("#form_class_module_select");
 
   querySnapshot.forEach((doc) => {
     let option = document.createElement('option');
