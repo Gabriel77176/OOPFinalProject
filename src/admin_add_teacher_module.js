@@ -25,20 +25,20 @@ const auth = getAuth();
 const db = getFirestore();
 
 let params = new URLSearchParams(window.location.search);
-let class_id = params.get("class_id");
-console.log(class_id);
+let module_id = params.get("module_id");
+console.log(module_id);
 
 const moduleCollection = collection(db, "module");
 const userCollection = collection(db, "user");
 
-let classDocRef = doc(db, "class", class_id);
-let classData;
+let moduleDocRef = doc(db, "module", module_id);
+let moduleData;
 
-await getDoc(classDocRef).then((docSnapshot) => {
+await getDoc(moduleDocRef).then((docSnapshot) => {
     if (docSnapshot.exists()) {
         // The document exists, store its data in a variable
-        classData = docSnapshot.data();
-        console.log(classData);
+        moduleData = docSnapshot.data();
+        console.log(moduleData);
     } else {
         alert("No such document!")
     }
@@ -46,8 +46,8 @@ await getDoc(classDocRef).then((docSnapshot) => {
     console.log("Error getting document:", error);
 });
 
-let h1_class_name = document.querySelector("#h1-class-name");
-h1_class_name.innerHTML = classData.name;
+let h1_module_name = document.querySelector("#h1-module-name");
+h1_module_name.innerHTML = moduleData.name;
 
 getDocs(userCollection).then((querySnapshot) => {
     const tbody = document.querySelector('#tbody-users');
@@ -64,9 +64,9 @@ getDocs(userCollection).then((querySnapshot) => {
             let checkbox = document.createElement('input');
             checkbox.type = "checkbox";
             checkbox.name = "student";
-            if (doc.data().class_id === class_id) {
+            /*if (doc.data().module_id === module_id) {
                 checkbox.checked = true;
-            }
+            }*/
             roleCell.appendChild(checkbox);
             row.appendChild(roleCell);
 
