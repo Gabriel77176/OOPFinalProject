@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Information</title>
+    <link rel="stylesheet" href="css/account.css">
+</head>
+<body style="background-image: url('../img/imageback.jpg');">
+    <nav class="main-nav">
+        <div class="nav-left centered">
+            <h1>OOP Final Exam</h1>
+        </div>
+        <div class="nav-center centered">
+            <a href="index.html">Home</a>
+            <a href="account.html">Account</a>
+            <a href="#">Grade</a>
+            <a href="#">Exam</a>
+        </div>
+        <div class="nav-right centered">
+            <span id="connect-p"></span>
+            <a href="login.html"><img id="login-img" src="img/icons/user-regular.svg" alt="LOGIN"></a>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="overlay"></div>
+            <h1>Personnal Informations</h1>
+            <div class="info-table">
+                <div class="info-row">
+                    <span class="info-label">First Name:</span>
+                    <span id="first-name" class="info-value"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Last Name:</span>
+                    <span id="last-name" class="info-value"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span id="email" class="info-value"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Phone Number:</span>
+                    <span id="phone" class="info-value"></span>
+                </div>
+            </div>
+            <button id="button-modif" class="modifier-btn">Modify Infomation</button>
+        </div>
+        <script src="./bundles/account.bundle.js"></script>
+    </main>
+</body>
+</html>

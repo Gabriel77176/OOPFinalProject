@@ -5,73 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <link rel="stylesheet" href="css/modules.css">
     <link rel="stylesheet" href="../css/nav-style.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/account.css">
 </head>
 <body>
     <nav class="main-nav">
         <div class="nav-left centered">
-            <h1>OOP Final Exam</h1>
+            <a href="#"><h1>OOP Final Exam</h1></a>
         </div>
         <div class="nav-center centered">
-            <a href="#">Page 1</a>
-            <a href="#">Page 2</a>
-            <a href="#">Page 3</a>
         </div>
         <div class="nav-right centered">
-            <span>Student</span>
-            <a href="./index.html"><img id="login-img" src="../img/icons/user-regular.svg" alt=""></a>
+            <span id="connect-p"></span>
+            <a id="details-a" href="#"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
         </div>
     </nav>
-    <main style="display: flex;">
-        <div class="container2">
-            <div class="overlay2"></div>
-            <h1>Personnel Informations</h1>
-            <table>
-                <tr>
-                    <td>First Name</td>
-                    <td id="first-name"></td>
-                </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td id="last-name"></td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td id="email" style="width: 500px"></td>
-                </tr>
-                <tr>
-                    <td>Phone Number</td>
-                    <td id="phone"></td>
-                </tr>
-            </table>
+    <main>
+        <h1>Modules</h1>
+        <div id="modules">
+            <a href="#" class="div-a"><div class="module">
+                <h2>Module 1</h2>
+                <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic vero error unde incidunt. Qui velit excepturi, delectus quam eos maiores possimus distinctio reiciendis omnis ratione consectetur repellendus esse magni eligendi?</p>
+            </div></a>
         </div>
-
-        <span style="margin-left: 20%"></span>
-
-        <div class="container2">
-            <h2>Modules</h2>
-            <ul class="module-ul">
-
-            </ul>
-        </div>
-
-        <div class="container2">
-            <h2>Exams</h2>
-            <ul class="exam-ul">
-
-            </ul>
-        </div>
-
-        <div class="container2">
-            <h2>Results</h2>
-            <ul class="result-ul">
-
-            </ul>
-        </div>
-
-        <script src="../bundles/student.bundle.js"></script>
     </main>
+    <script src="../bundles/student_index.bundle.js"></script>
+    <script src="../bundles/global.bundle.js"></script>
 </body>
 </html>

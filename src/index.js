@@ -27,21 +27,6 @@ const db = getFirestore();
 
 const moduleCollection = collection(db, 'module');
 
-const debug_p = document.querySelector('#connect-p');
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, display the email
-    debug_p.innerHTML = user.email;
-    console.log("connecté");
-  } else {
-    // No user is signed in, display "non connecté"
-    debug_p.innerHTML = "Not Connected";
-    console.log("non connecté");
-
-  }
-});
-
 const logoutButton = document.getElementById('logout');
 logoutButton.addEventListener('click', (e) => {
   e.preventDefault();

@@ -12,6 +12,8 @@ module.exports = {
         admin_create_class: './src/admin_create_class.js',
         admin_add_teacher_module: './src/admin_add_teacher_module.js',
         admin_add_class_module: './src/admin_add_class_module.js',
+        student_index: './src/student_index.js',
+        global: './src/global.js',
         student: './src/student.js',
         account: './src/account.js',
     },
