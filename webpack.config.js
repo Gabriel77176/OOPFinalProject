@@ -13,6 +13,7 @@ module.exports = {
         admin_add_teacher_module: './src/admin_add_teacher_module.js',
         admin_add_class_module: './src/admin_add_class_module.js',
         student: './src/student.js',
+        account: './src/account.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
