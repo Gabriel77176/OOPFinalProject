@@ -1,12 +1,10 @@
 import { initializeApp } from 'firebase/app';
-
-
 import {
     getAuth,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword, signOut
 } from "firebase/auth";
-import {addDoc, collection, doc, getDoc, getDocs, getFirestore} from "firebase/firestore";
+import {addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, where} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4",
@@ -30,6 +28,7 @@ console.log(module_id);
 
 const moduleCollection = collection(db, "module");
 const userCollection = collection(db, "user");
+const userModuleCollection = collection(db, "user_module");
 
 let moduleDocRef = doc(db, "module", module_id);
 let moduleData;
@@ -52,25 +51,98 @@ h1_module_name.innerHTML = moduleData.name;
 getDocs(userCollection).then((querySnapshot) => {
     const tbody = document.querySelector('#tbody-users');
 
-    querySnapshot.forEach((doc) => {
-        if (doc.data().role === 'lecturer') {
+    querySnapshot.forEach((docu) => {
+        if (docu.data().role === 'lecturer') {
             let row = document.createElement('tr');
 
             let nameCell = document.createElement('td');
-            nameCell.textContent = doc.data().firstName + ' ' + doc.data().lastName;
+            nameCell.textContent = docu.data().firstName + ' ' + docu.data().lastName;
             row.appendChild(nameCell);
 
             let roleCell = document.createElement('td');
             let checkbox = document.createElement('input');
             checkbox.type = "checkbox";
             checkbox.name = "student";
-            /*if (doc.data().module_id === module_id) {
-                checkbox.checked = true;
-            }*/
+            checkbox.value = docu.id;
+
+            // Check if a document exists in the user_module collection with module_id = module_id and user_id = current user's id
+
+            const q = query(userModuleCollection, where("module_id", "==", module_id), where("user_id", "==", docu.id));
+
+            getDocs(q).then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    checkbox.checked = true;
+                });
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+
             roleCell.appendChild(checkbox);
             row.appendChild(roleCell);
 
             tbody.appendChild(row);
+        }
+    });
+});
+
+async function isModuleThere(module_id, checkbox) {
+    return new Promise((resolve, reject) => {
+        let is_there = false;
+
+        const q = query(userModuleCollection, where("module_id", "==", module_id), where("user_id", "==", checkbox.value));
+
+        getDocs(q).then((querySnapshot) => {
+            querySnapshot.forEach((docu) => {
+                is_there = true;
+                console.log("Chgt à true");
+            });
+            resolve(is_there);
+        }).catch((error) => {
+            console.log("Error getting documents: ", error);
+            reject(error);
+        });
+    });
+}
+
+let form = document.querySelector("#add-teacher-module-form");
+
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    let checkboxes = document.querySelectorAll('input[type=checkbox]');
+
+    checkboxes.forEach( async (checkbox) => {
+        if (checkbox.checked === false) {
+            let userId = checkbox.value;
+
+            const q = query(userModuleCollection, where("module_id", "==", module_id), where("user_id", "==", checkbox.value));
+
+            getDocs(q).then((querySnapshot) => {
+                querySnapshot.forEach((docu) => {
+                    deleteDoc(docu.ref).then(() => {
+                        console.log("Document successfully deleted!");
+                    }).catch((error) => {
+                        console.error("Error removing document: ", error);
+                    })
+                });
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+        }
+        else {
+            let is_there = await isModuleThere(module_id, checkbox);
+
+            if (is_there === false) {
+                console.log("Verification")
+                addDoc(userModuleCollection, {
+                    user_id: checkbox.value,
+                    module_id: module_id
+                }).then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id);
+                }).catch((error) => {
+                    console.error("Error adding document: ", error);
+                });
+            }
         }
     });
 });
