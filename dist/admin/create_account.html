@@ -6,7 +6,7 @@
     <title>Create Account</title>
     <link rel="stylesheet" href="css/create_account.css">
 </head>
-<body>
+<body style="background-image: url('img/imageback.jpg');">
     <nav class="main-nav">
         <div class="nav-left centered">
             <h1>OOP Final Exam</h1>
@@ -28,37 +28,51 @@
             <h1>Create Account</h1>
             <form method="post" id="create-account-form">
                 <div>
-                    <label for="first_name">First Name:</label>
-                    <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+                    <div class="info-label">First Name:</div>
+                    <div class="info-input">
+                        <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+                    </div>
                 </div>
                 <div>
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+                    <div class="info-label">Last Name:</div>
+                    <div class="info-input">
+                        <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+                    </div>
                 </div>
                 <div>
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <div class="info-label">Email:</div>
+                    <div class="info-input">
+                        <input type="email" name="email" id="email" placeholder="Email" required>
+                    </div>
                 </div>
                 <div>
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <div class="info-label">Password:</div>
+                    <div class="info-input">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                    </div>
                 </div>
                 <div>
-                    <label for="phone_number">Phone Number:</label>
-                    <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" required>
+                    <div class="info-label">Phone Number:</div>
+                    <div class="info-input">
+                        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" required>
+                    </div>
                 </div>
                 <div>
-                    <label for="role">Role:</label>
-                    <select name="role" id="role" required>
-                        <option value="student">Student</option>
-                        <option value="lecturer">Lecturer</option>
-                    </select>
+                    <div class="info-label">Role:</div>
+                    <div class="info-input">
+                        <select name="role" id="role" required>
+                            <option value="student">Student</option>
+                            <option value="lecturer">Lecturer</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
-                    <label for="class-select">Class:</label>
-                    <select name="class" id="class-select" required>
-                        <option value="no-class">No class</option>
-                    </select>
+                    <div class="info-label">Class:</div>
+                    <div class="info-input">
+                        <select name="class" id="class-select" required>
+                            <option value="no-class">No class</option>
+                        </select>
+                    </div>
                 </div>
                 <div>
                     <input type="submit" value="Create Account" class="create-account-btn">

@@ -6,8 +6,8 @@
     <title>Create Class</title>
     <link rel="stylesheet" href="css/create_class.css">
 </head>
-<body>
-    <nav class="main-nav">
+<body style="background-image: url('img/imageback.jpg');">
+        <nav class="main-nav">
         <div class="nav-left centered">
             <h1>OOP Final Exam</h1>
         </div>
@@ -30,7 +30,9 @@
             <form method="post" id="create-class-form">
                 <div>
                     <label for="new_class">New Class :</label>
-                    <input type="text" name="name" placeholder="Class Name" required>
+                    <div class="info-input">
+                        <input type="text" name="name" placeholder="Class Name" required>
+                    </div>
                 </div>
                 <div>
                     <input type="submit" value="Create Class" class="create-class-btn">

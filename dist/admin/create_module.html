@@ -6,8 +6,8 @@
     <title>Create Module</title>
     <link rel="stylesheet" href="css/create_module.css">
 </head>
-<body>
-    <nav class="main-nav">
+<body style="background-image: url('img/imageback.jpg');">
+        <nav class="main-nav">
         <div class="nav-left centered">
             <h1>OOP Final Exam</h1>
         </div>
@@ -30,11 +30,15 @@
             <form method="post" id="create-module-form">
                 <div>
                     <label for="class">Class Name :</label>
-                    <input type="text" name="name" placeholder="Class Name" required>
+                    <div class="info-input">
+                        <input type="text" name="name" placeholder="Class Name" required>
+                    </div>
                 </div>
                 <div>
                     <label for="coef">Coef :</label>
-                    <input type="number" name="coef" placeholder="1" min="0" step="0.25" required>
+                    <div class="info-input">
+                        <input type="number" name="coef" placeholder="1" min="0" step="0.25" required>
+                    </div>
                 </div>
                 <div>
                     <input type="submit" value="Create Module" class="create-module-btn">
