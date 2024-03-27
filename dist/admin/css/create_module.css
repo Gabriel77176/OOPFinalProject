@@ -6,6 +6,19 @@ h1 {
     color: #226D68; /* Nouvelle couleur du titre */
 }
 
+#login-button-container {
+    margin-right: -5px; /* Décalage légèrement vers la gauche */
+}
+
+.container {
+    margin: 100px auto; /* Centrer le contenu verticalement */
+    max-width: 600px; /* Limite de la largeur du conteneur */
+    padding: 20px;
+    background-color: #ECF8F6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .info-table {
     margin: 0 auto; /* Centrer la table */
     width: 70%; /* Largeur de la table */
