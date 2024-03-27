@@ -6,23 +6,39 @@ main {
     margin: 50px;
 }
 
+/* Styles pour la section des modules */
+.title {
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
 #exams {
-    display: grid;
+    /*display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     align-items: stretch;
-    min-height: 0;
+    min-height: 0;*/
+
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
 }
 
 .exam {
-    padding: 20px;
+    /*padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: black 1px solid;
-    height: 100px;
+    height: 100px;*/
+    width: 400px; 
+    padding: 20px; 
+    margin: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    background-color: #ECF8F6;
 }
 
 .div-a {
     text-decoration: none;
-    color: black;
+    color: inherit;
 }

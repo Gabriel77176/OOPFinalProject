@@ -8,36 +8,36 @@ main {
 
 /* Styles pour la section des modules */
 .title {
-    text-align: center; /* Centrer le titre */
-    margin-bottom: 20px; /* Marge en bas du titre */
+    text-align: center; 
+    margin-bottom: 20px; 
 }
 
 #modules {
-    display: flex; /* Affichage en ligne des modules */
-    flex-wrap: wrap; /* Permettre le retour à la ligne */
-    justify-content: flex-start; /* Espacement égal entre les modules */
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
 }
 
 .div-a {
-    text-decoration: none; /* Enlever la décoration des liens */
-    color: inherit; /* Utiliser la couleur héritée */
+    text-decoration: none; 
+    color: inherit; 
 }
 
 .module {
-    width: 400px; /* Largeur fixe des modules */
-    padding: 20px; /* Espacement à l'intérieur des modules */
-    margin: 10px; /* Marge autour des modules */
-    border: 1px solid #ccc; /* Bordure autour des modules */
-    border-radius: 8px; /* Coins arrondis */
-    background-color: #ECF8F6; /* Couleur de fond des modules */
+    width: 400px; 
+    padding: 20px; 
+    margin: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    background-color: #ECF8F6; 
 }
 
 .module h2 {
-    margin-top: 0; /* Supprimer la marge en haut du titre */
-    color: #18534F; /* Couleur du titre */
+    margin-top: 0; 
+    color: #18534F; 
 }
 
 .module p {
-    margin-top: 10px; /* Marge en haut du paragraphe */
-    color: #226D68; /* Couleur du texte */
+    margin-top: 10px; 
+    color: #226D68; 
 }
