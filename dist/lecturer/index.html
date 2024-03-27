@@ -5,42 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="css/nav-style.css">
+    <link rel="stylesheet" href="./css/modules.css">
+    <link rel="stylesheet" href="../css/nav-style.css">
 </head>
 <body>
-    <nav class="main-nav">
-        <div class="nav-left centered">
-            <h1>OOP Final Exam</h1>
-        </div>
-        <div class="nav-center centered">
-            <a href="#">Page 1</a>
-            <a href="#">Page 2</a>
-            <a href="#">Page 3</a>
-        </div>
-        <div class="nav-right centered">
-            <span id="connect-p"></span>
-            <a href="login.html"><img id="login-img" src="img/icons/user-regular.svg" alt="LOGIN"></a>
-        </div>
-    </nav>
-    <main>
-        <h1>Title</h1>
-
-        <a href="login.html">LOGIN</a>
-        <a href="#" id="logout">LOGOUT</a>
-        <br>
-        <a href="admin/create_account.html">CREATE USER</a>
-        <br>
-        <a href="admin/create_module.html">CREATE MODULE</a>
-        <br>
-        <a href="admin/create_class.html">CREATE CLASS</a>
-        <br>
-        <form id="form_class">
-            <select name="class_id" id="form_class_select">
-            </select>
-            <input type="submit" value="Add User to Class">
-        </form>
-        <script src="bundles/index.bundle.js"></script>
-        <script src="bundles/admin.bundle.js"></script>
-    </main>
+<nav class="main-nav">
+    <div class="nav-left centered">
+        <a href="#"><h1>OOP Final Exam</h1></a>
+    </div>
+    <div class="nav-center centered">
+    </div>
+    <div class="nav-right centered">
+        <span id="connect-p"></span>
+        <a id="details-a" href="#"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
+    </div>
+</nav>
+<main>
+    <h1>Modules</h1>
+    <div id="modules">
+        <a href="#" class="div-a"><div class="module">
+            <h2>Module 1</h2>
+            <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic vero error unde incidunt. Qui velit excepturi, delectus quam eos maiores possimus distinctio reiciendis omnis ratione consectetur repellendus esse magni eligendi?</p>
+        </div></a>
+    </div>
+</main>
+<script src="../bundles/lecturer_index.bundle.js"></script>
+<script src="../bundles/global.bundle.js"></script>
 </body>
 </html>
