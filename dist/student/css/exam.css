@@ -1,7 +1,49 @@
-body {
-    background: white;
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #226D68; /* Nouvelle couleur du titre */
 }
 
-main {
-    margin: 50px;
+.info-table {
+    margin: 0 auto; /* Centrer la table */
+    width: 70%; /* Largeur de la table */
+    padding: 20px;
+    background-color: #FEEAA1; /* Nouvelle couleur du carré */
+    border-radius: 8px;
+}
+
+.info-row {
+    /*display: flex;*/
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #18534F; /* Nouvelle couleur du texte des labels */
+}
+
+.info-value {
+    color: #D6955B;
+}
+
+#name-span {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #226D68;
+}
+
+#login-button-container {
+    margin-right: -5px; /* Décalage légèrement vers la gauche */
+}
+
+.container {
+    margin: 100px auto; /* Centrer le contenu verticalement */
+    max-width: 600px; /* Limite de la largeur du conteneur */
+    padding: 20px;
+    background-color: #ECF8F6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

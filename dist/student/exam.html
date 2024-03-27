@@ -5,30 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="css/module.css">
+    <link rel="stylesheet" href="css/exam.css">
     <link rel="stylesheet" href="../css/nav-style.css">
 </head>
-<body>
-<nav class="main-nav">
-    <div class="nav-left centered">
-        <a href="index.html"><h1>OOP Final Exam</h1></a>
-    </div>
-    <div class="nav-center centered">
-    </div>
-    <div class="nav-right centered">
-        <span id="connect-p"></span>
-        <a id="details-a" href="#"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
-    </div>
-</nav>
-<main>
-    <h1><span id="name-span">0</span></h1>
-    <p>Description: <br><span id="description-span">0</span></p>
-    <p>Grade: <span id="grade-span">0</span></p>
-    <p>Coef: <span id="coef-span">0</span></p>
-    <p>Date: <span id="date-span">0</span></p>
+<body style="background-image: url('img/imageback.jpg');">
+    <nav class="main-nav">
+        <div class="nav-left centered">
+            <h1>OOP Final Exam</h1>
+        </div>
+        <div class="nav-center centered">
+            <a href="index.html">Home</a>
+            <a href="exam.html">Exam</a>
+            <a href="module.html">Module</a>
+        </div>
+        <div class="nav-right centered">
+            <span id="connect-p"></span>
+            <a id="details-a" href="#"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="overlay"></div>
+            <h1><span id="name-span">Exam</span></h1>
+            <div class="info-table">
+                <div class="info-row">
+                    <label class="info-label" for="coef">Grade :</label>
+                    <span id="grade-span" class="info-value">0</span>
+                </div>
+                <div class="info-row">
+                    <label class="info-label" for="coef">Coef :</label>
+                    <span id="coef-span" class="info-value">0</span>
+                </div>
+                <div class="info-row">
+                    <label class="info-label" for="coef">Date :</label>
+                    <span id="date-span" class="info-value">0</span>
+                </div>
+                <div class="info-row">
+                    <label class="info-label" for="class">Description :</label>
+                    <br>
+                    <span id="description-span" class="info-value">0</span>
+                </div>
+            </div>
+        </div>
 
-</main>
-<script src="../bundles/student_exam.bundle.js"></script>
-<script src="../bundles/global.bundle.js"></script>
+        <script src="../bundles/student_exam.bundle.js"></script>
+        <script src="../bundles/global.bundle.js"></script>
+    </main>
 </body>
 </html>

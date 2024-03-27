@@ -1,31 +1,38 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .main-nav {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
-    background-color: #B38FB8;
-}
-
-.nav-left {
-    display: flex;
-    justify-content: center;
-    align-items: start;
-}
-
-.nav-left a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: black;
-}
-
-.nav-center {
-    display: flex;
-    justify-content: center;
     align-items: center;
+    padding: 20px;
+    background-color: #18534F; /* Nouvelle couleur de la barre de navigation */
+    color: #fff; /* Nouvelle couleur du texte de la barre de navigation */
+}
+
+.main-nav h1 {
+    color: #FFF; /* Couleur du texte du titre */
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.main-nav .nav-center {
+    display: flex;
+    justify-content: center; /* Centrer horizontalement les éléments */
+    align-items: center;
+}
+
+.main-nav .nav-center a {
+    margin: 0 10px; /* Espace entre les liens */
 }
 
 .nav-right {
@@ -34,18 +41,9 @@ body {
     align-items: center;
 }
 
-.main-nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: #333;
-}
-
-.main-nav h1 {
-    margin: 0;
-    font-size: 1.5em;
-}
-
 #login-img {
     width: 30px;
     height: 30px;
+    margin-right: 5px; /* Ajout d'une marge à droite pour espacer le bouton de l'image */
 }
+
