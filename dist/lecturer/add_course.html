@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Add Course</h1>
+<form id="add-course-form">
+    <label for="course-name">Course Name</label>
+    <input type="text" id="course-name" name="course-name" required>
+    <label for="course-timein">time in</label>
+    <input type="datetime-local" id="course-timein" name="course-timein" required>
+    <label for="course-timeout">time out</label>
+    <input type="datetime-local" id="course-timeout" name="course-timeout" required>
+    <label for="course-description">Course Description</label>
+    <input type="text" id="course-description" name="course-description" required>
+    <button type="submit" id="add-course">Add Course</button>
+
+    <script src="../bundles/lecturer_add_course.bundle.js"></script>
+</form>
+</body>
+</html>

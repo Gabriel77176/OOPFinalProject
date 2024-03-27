@@ -50,13 +50,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/lecturer_module.js":
-/*!********************************!*\
-  !*** ./src/lecturer_module.js ***!
-  \********************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/lecturer_add_course.js":
+/*!************************************!*\
+  !*** ./src/lecturer_add_course.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4\",\r\n    authDomain: \"oopfinalproject-1ad78.firebaseapp.com\",\r\n    projectId: \"oopfinalproject-1ad78\",\r\n    storageBucket: \"oopfinalproject-1ad78.appspot.com\",\r\n    messagingSenderId: \"10697858559\",\r\n    appId: \"1:10697858559:web:0eea452e24f9883f6e9bca\",\r\n    measurementId: \"G-2ZS6JBKR21\"\r\n};\r\n\r\n// Initialize Firebase\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)();\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\n\r\nlet params = new URLSearchParams(window.location.search);\r\nlet module_id = params.get(\"module_id\");\r\nconsole.log(\"MODULE: \", module_id);\r\n\r\nconst courseButton = document.getElementById(\"add-course\");\r\ncourseButton.addEventListener(\"click\", () => {\r\n    window.location.href = \"add_course.html?module_id=\" + module_id;\r\n});\r\n\r\nconst button = document.getElementById(\"add-exam\");\r\nbutton.addEventListener(\"click\", () => {\r\n    window.location.href = \"add_exam.html?module_id=\" + module_id;\r\n});\r\n\r\nconst examsDiv = document.getElementById(\"exams\");\r\nconst exams = await getExamsFromModule(module_id);\r\nexams.forEach(exam => {\r\n    const examA = document.createElement(\"a\");\r\n    examA.href = \"#\";\r\n    examA.classList.add(\"div-a\")\r\n    examA.addEventListener(\"click\", async () => {\r\n        await goToExam(exam.id);\r\n    });\r\n\r\n    //const addDiv = document.getElementById(\"add-exam\")\r\n\r\n    const examDiv = document.createElement(\"div\");\r\n    examDiv.classList.add(\"exam\");\r\n\r\n    const examTitle = document.createElement(\"h2\");\r\n    examTitle.textContent = exam.data().name;\r\n\r\n    const examDescription = document.createElement(\"p\");\r\n    examDescription.textContent = exam.data().description;\r\n\r\n    examDiv.appendChild(examTitle);\r\n    examDiv.appendChild(examDescription);\r\n\r\n    examA.appendChild(examDiv);\r\n    examsDiv.prepend(examA);\r\n\r\n});\r\n\r\n\r\n\r\nconst coursesDiv = document.getElementById(\"courses\");\r\nconst courses = await getCoursesFromModule(module_id);\r\ncourses.forEach(course => {\r\n    const courseA = document.createElement(\"a\");\r\n    courseA.href = \"#\";\r\n    courseA.classList.add(\"div-a\")\r\n    courseA.addEventListener(\"click\", async () => {\r\n        await goToCourse(course.id);\r\n    });\r\n\r\n    const courseDiv = document.createElement(\"div\");\r\n    courseDiv.classList.add(\"course\");\r\n\r\n    const courseTitle = document.createElement(\"h2\");\r\n    courseTitle.textContent = course.data().name;\r\n\r\n    const courseDescription = document.createElement(\"p\");\r\n    courseDescription.textContent = course.data().description;\r\n\r\n    const coursetime_in = document.createElement(\"p\");\r\n    const timeIn = course.data().time_in;\r\n    const timeOut = course.data().time_out;\r\n    coursetime_in.textContent = \"Time in: \" + timeIn.toDate().toLocaleString();\r\n    courseDescription.appendChild(coursetime_in);\r\n\r\n    const coursetime_out = document.createElement(\"p\");\r\n    coursetime_out.textContent = \"Time out: \" + timeOut.toDate().toLocaleString();\r\n    courseDescription.appendChild(coursetime_out);\r\n\r\n\r\n    courseDiv.appendChild(courseTitle);\r\n    courseDiv.appendChild(courseDescription);\r\n\r\n    courseA.appendChild(courseDiv);\r\n    coursesDiv.prepend(courseA);\r\n\r\n});\r\n\r\n\r\n\r\nasync function getExamsFromModule(moduleId) {\r\n    return new Promise((resolve, reject) => {\r\n        const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"event\"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)(\"module_id\", \"==\", moduleId));\r\n\r\n        (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q).then(querySnapshot => {\r\n            if (!querySnapshot.empty) {\r\n                resolve(querySnapshot.docs);\r\n            } else {\r\n                resolve([]);\r\n            }\r\n        }).catch(error => {\r\n            reject(error);\r\n        });\r\n    });\r\n}\r\n\r\nasync function getCoursesFromModule(moduleId) {\r\n    return new Promise((resolve, reject) => {\r\n        const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"course\"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)(\"module_id\", \"==\", moduleId));\r\n\r\n        (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q).then(querySnapshot => {\r\n            if (!querySnapshot.empty) {\r\n                resolve(querySnapshot.docs);\r\n            } else {\r\n                resolve([]);\r\n            }\r\n        }).catch(error => {\r\n            reject(error);\r\n        });\r\n    });\r\n}\r\n\r\nfunction goToExam(examId) {\r\n    let currentUrl = new URL(window.location.href);\r\n    let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\\/[^/]+$/, '/');\r\n\r\n    let newRelativeUrl = \"exam.html\";\r\n    let newUrl = baseUrl + newRelativeUrl;\r\n\r\n    let urlObject = new URL(newUrl);\r\n    urlObject.searchParams.append('exam_id', examId);\r\n\r\n    window.location.href = urlObject.toString();\r\n}\r\n\r\nfunction goToCourse(courseId) {\r\n    let currentUrl = new URL(window.location.href);\r\n    let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\\/[^/]+$/, '/');\r\n\r\n    let newRelativeUrl = \"course.html\";\r\n    let newUrl = baseUrl + newRelativeUrl;\r\n\r\n    let urlObject = new URL(newUrl);\r\n    urlObject.searchParams.append('course_id', courseId);\r\n\r\n    window.location.href = urlObject.toString();\r\n}\r\n\r\n\r\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack:///./src/lecturer_module.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4\",\r\n    authDomain: \"oopfinalproject-1ad78.firebaseapp.com\",\r\n    projectId: \"oopfinalproject-1ad78\",\r\n    storageBucket: \"oopfinalproject-1ad78.appspot.com\",\r\n    messagingSenderId: \"10697858559\",\r\n    appId: \"1:10697858559:web:0eea452e24f9883f6e9bca\",\r\n    measurementId: \"G-2ZS6JBKR21\"\r\n};\r\n\r\n// Initialize Firebase\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)();\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\n\r\nlet params = new URLSearchParams(window.location.search);\r\nlet module_id = params.get(\"module_id\");\r\nconsole.log(\"MODULE: \", module_id);\r\n\r\n\r\nconst form = document.getElementById(\"add-course-form\");\r\nform.addEventListener(\"submit\", async (event) => {\r\n    event.preventDefault();\r\n\r\n    const courseName = document.getElementById(\"course-name\").value;\r\n    const courseTimeIn = document.getElementById(\"course-timein\").value;\r\n    const courseTimeOut = document.getElementById(\"course-timeout\").value;\r\n    const courseDateTimestampIN = firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.Timestamp.fromDate(new Date(courseTimeIn));\r\n    const courseDateTimestampOUT = firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.Timestamp.fromDate(new Date(courseTimeOut));\r\n    const courseDescription = document.getElementById(\"course-description\").value;\r\n\r\n    const newCourse = {\r\n        name: courseName,\r\n        time_in: courseDateTimestampIN,\r\n        time_out: courseDateTimestampOUT,\r\n        module_id: module_id,\r\n        description: courseDescription\r\n    };\r\n\r\n    try {\r\n        const docRef = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.addDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"course\"), newCourse);\r\n        console.log(\"Document written with ID: \", docRef.id);\r\n    } catch (e) {\r\n        console.error(\"Error adding document: \", e);\r\n    }\r\n});\n\n//# sourceURL=webpack:///./src/lecturer_add_course.js?");
 
 /***/ }),
 
@@ -187,75 +187,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/async module */
-/******/ 	(() => {
-/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
-/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
-/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
-/******/ 		var resolveQueue = (queue) => {
-/******/ 			if(queue && queue.d < 1) {
-/******/ 				queue.d = 1;
-/******/ 				queue.forEach((fn) => (fn.r--));
-/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
-/******/ 			}
-/******/ 		}
-/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
-/******/ 			if(dep !== null && typeof dep === "object") {
-/******/ 				if(dep[webpackQueues]) return dep;
-/******/ 				if(dep.then) {
-/******/ 					var queue = [];
-/******/ 					queue.d = 0;
-/******/ 					dep.then((r) => {
-/******/ 						obj[webpackExports] = r;
-/******/ 						resolveQueue(queue);
-/******/ 					}, (e) => {
-/******/ 						obj[webpackError] = e;
-/******/ 						resolveQueue(queue);
-/******/ 					});
-/******/ 					var obj = {};
-/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
-/******/ 					return obj;
-/******/ 				}
-/******/ 			}
-/******/ 			var ret = {};
-/******/ 			ret[webpackQueues] = x => {};
-/******/ 			ret[webpackExports] = dep;
-/******/ 			return ret;
-/******/ 		}));
-/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
-/******/ 			var queue;
-/******/ 			hasAwait && ((queue = []).d = -1);
-/******/ 			var depQueues = new Set();
-/******/ 			var exports = module.exports;
-/******/ 			var currentDeps;
-/******/ 			var outerResolve;
-/******/ 			var reject;
-/******/ 			var promise = new Promise((resolve, rej) => {
-/******/ 				reject = rej;
-/******/ 				outerResolve = resolve;
-/******/ 			});
-/******/ 			promise[webpackExports] = exports;
-/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
-/******/ 			module.exports = promise;
-/******/ 			body((deps) => {
-/******/ 				currentDeps = wrapDeps(deps);
-/******/ 				var fn;
-/******/ 				var getResult = () => (currentDeps.map((d) => {
-/******/ 					if(d[webpackError]) throw d[webpackError];
-/******/ 					return d[webpackExports];
-/******/ 				}))
-/******/ 				var promise = new Promise((resolve) => {
-/******/ 					fn = () => (resolve(getResult));
-/******/ 					fn.r = 0;
-/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
-/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
-/******/ 				});
-/******/ 				return fn.r ? promise : getResult();
-/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
-/******/ 			queue && queue.d < 0 && (queue.d = 0);
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -301,7 +232,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/lecturer_module.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/lecturer_add_course.js");
 /******/ 	
 /******/ })()
 ;
