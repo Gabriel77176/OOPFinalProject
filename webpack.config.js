@@ -16,6 +16,7 @@ module.exports = {
         global: './src/global.js',
         student: './src/student.js',
         account: './src/account.js',
+        lecturer_index: './src/lecturer_index.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
