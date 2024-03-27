@@ -4,7 +4,7 @@ import { getAuth,
     signInWithEmailAndPassword,
     onAuthStateChanged
 } from "firebase/auth";
-import {addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where} from "firebase/firestore";
+import {addDoc, collection, doc, getDoc, getDocs, getFirestore, query, Timestamp, where} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4",
@@ -34,10 +34,12 @@ form.addEventListener("submit", async (event) => {
     const examName = document.getElementById("exam-name").value;
     const examDate = document.getElementById("exam-date").value;
     const examCoef = document.getElementById("exam-coef").value;
+    const examDateTimestamp = Timestamp.fromDate(new Date(examDate));
+
 
     const newExam = {
         name: examName,
-        date: examDate,
+        date: examDateTimestamp,
         coef: examCoef,
         module_id: module_id
     };
