@@ -19,6 +19,8 @@ module.exports = {
         student: './src/student.js',
         account: './src/account.js',
         lecturer_index: './src/lecturer_index.js',
+        lecturer_module: './src/lecturer_module.js',
+        lecturer_add_exam: './src/lecturer_add_exam.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
