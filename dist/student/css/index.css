@@ -6,20 +6,38 @@ main {
     margin: 50px;
 }
 
-#modules {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+/* Styles pour la section des modules */
+.title {
+    text-align: center; /* Centrer le titre */
+    margin-bottom: 20px; /* Marge en bas du titre */
 }
 
-.module {
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border: black 1px solid;
+#modules {
+    display: flex; /* Affichage en ligne des modules */
+    flex-wrap: wrap; /* Permettre le retour à la ligne */
+    justify-content: flex-start; /* Espacement égal entre les modules */
 }
 
 .div-a {
-    text-decoration: none;
-    color: black;
+    text-decoration: none; /* Enlever la décoration des liens */
+    color: inherit; /* Utiliser la couleur héritée */
+}
+
+.module {
+    width: 400px; /* Largeur fixe des modules */
+    padding: 20px; /* Espacement à l'intérieur des modules */
+    margin: 10px; /* Marge autour des modules */
+    border: 1px solid #ccc; /* Bordure autour des modules */
+    border-radius: 8px; /* Coins arrondis */
+    background-color: #ECF8F6; /* Couleur de fond des modules */
+}
+
+.module h2 {
+    margin-top: 0; /* Supprimer la marge en haut du titre */
+    color: #18534F; /* Couleur du titre */
+}
+
+.module p {
+    margin-top: 10px; /* Marge en haut du paragraphe */
+    color: #226D68; /* Couleur du texte */
 }
