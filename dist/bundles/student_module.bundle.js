@@ -50,13 +50,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/student_index.js":
-/*!******************************!*\
-  !*** ./src/student_index.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/student_module.js":
+/*!*******************************!*\
+  !*** ./src/student_module.js ***!
+  \*******************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4\",\r\n    authDomain: \"oopfinalproject-1ad78.firebaseapp.com\",\r\n    projectId: \"oopfinalproject-1ad78\",\r\n    storageBucket: \"oopfinalproject-1ad78.appspot.com\",\r\n    messagingSenderId: \"10697858559\",\r\n    appId: \"1:10697858559:web:0eea452e24f9883f6e9bca\",\r\n    measurementId: \"G-2ZS6JBKR21\"\r\n};\r\n\r\n// Initialize Firebase\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)();\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\n\r\nconst userModuleCollection = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, 'class_module');\r\n\r\nlet globalUser = null;\r\n\r\nasync function isConnected() {\r\n    return new Promise((resolve, reject) => {\r\n        while (globalUser) {\r\n            resolve(globalUser);\r\n        }\r\n    });\r\n}\r\n\r\nasync function getUser() {\r\n    return new Promise((resolve, reject) => {\r\n        if (globalUser) {\r\n            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"user\"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)(\"auth_id\", \"==\", globalUser.uid));\r\n\r\n            (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q).then(querySnapshot => {\r\n                if (!querySnapshot.empty) {\r\n                    resolve(querySnapshot.docs[0]);\r\n                } else {\r\n                    reject(\"User not found in database.\");\r\n                }\r\n            }).catch(error => {\r\n                reject(error);\r\n            });\r\n        } else {\r\n            reject(\"User not logged in, please log in first.\");\r\n        }\r\n    });\r\n}\r\n\r\nasync function getUserModules(classId) {\r\n    return new Promise((resolve, reject) => {\r\n        const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)(userModuleCollection, (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)(\"class_id\", \"==\", classId));\r\n\r\n        (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q).then(querySnapshot => {\r\n            resolve(querySnapshot);\r\n        }).catch(error => {\r\n            reject(error);\r\n        });\r\n    });\r\n}\r\n\r\nasync function goToModule(moduleId) {\r\n    let currentUrl = new URL(window.location.href);\r\n    let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\\/[^/]+$/, '/');\r\n\r\n    let newRelativeUrl = \"module.html\";\r\n    let newUrl = baseUrl + newRelativeUrl;\r\n\r\n    let urlObject = new URL(newUrl);\r\n    urlObject.searchParams.append('module_id', moduleId);\r\n\r\n    window.location.href = urlObject.toString();\r\n}\r\n\r\nconst detailsButton = document.getElementById(\"details-a\");\r\ndetailsButton.addEventListener(\"click\", async () => {\r\n    console.log(\"details button clicked\");\r\n\r\n    let currentUrl = new URL(window.location.href);\r\n    let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\\/[^/]+$/, '/');\r\n\r\n    let newRelativeUrl = \"account.html\";\r\n    let newUrl = baseUrl + newRelativeUrl;\r\n\r\n    let urlObject = new URL(newUrl);\r\n    const user = await getUser();\r\n    urlObject.searchParams.append('user_id', user.id);\r\n\r\n    window.location.href = urlObject.toString();\r\n});\r\n\r\n\r\n(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(auth, async user2 => {\r\n    if (user2) {\r\n        globalUser = user2;\r\n        const modulesDiv = document.getElementById(\"modules\");\r\n        modulesDiv.innerHTML = \"\";\r\n\r\n        const user = await getUser();\r\n        const userModulesSnapshot = await getUserModules(user.data().class_id);\r\n        console.log(user.data().class_id)\r\n        const userModules = userModulesSnapshot.docs;\r\n        console.log(userModules.length)\r\n        for (const userModule of userModules) {\r\n            const moduleRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)(db, 'module', userModule.data().module_id);\r\n            const module = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDoc)(moduleRef);\r\n            const moduleA = document.createElement(\"a\");\r\n            moduleA.href = \"#\";\r\n            moduleA.classList.add(\"div-a\")\r\n            moduleA.addEventListener(\"click\", async () => {\r\n                await goToModule(module.id);\r\n            });\r\n            const moduleDiv = document.createElement(\"div\");\r\n            moduleDiv.classList.add(\"module\");\r\n            moduleDiv.innerHTML = `\r\n        <h2>${module.data().name}</h2>\r\n        <p>${\"Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic vero error unde incidunt. Qui velit excepturi, delectus quam eos maiores possimus distinctio reiciendis omnis ratione consectetur repellendus esse magni eligendi?</p>\"}\r\n\r\n    `;\r\n            moduleA.appendChild(moduleDiv);\r\n            modulesDiv.appendChild(moduleA);\r\n\r\n        }\r\n    } else {\r\n        console.log('No user is signed in');\r\n    }\r\n});\n\n//# sourceURL=webpack:///./src/student_index.js?");
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4\",\r\n    authDomain: \"oopfinalproject-1ad78.firebaseapp.com\",\r\n    projectId: \"oopfinalproject-1ad78\",\r\n    storageBucket: \"oopfinalproject-1ad78.appspot.com\",\r\n    messagingSenderId: \"10697858559\",\r\n    appId: \"1:10697858559:web:0eea452e24f9883f6e9bca\",\r\n    measurementId: \"G-2ZS6JBKR21\"\r\n};\r\n\r\n// Initialize Firebase\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)();\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\n\r\nlet params = new URLSearchParams(window.location.search);\r\nlet module_id = params.get(\"module_id\");\r\nconsole.log(\"MODULE: \", module_id);\r\n\r\nasync function getExamsFromModule(moduleId) {\r\n    return new Promise((resolve, reject) => {\r\n        const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"event\"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)(\"module_id\", \"==\", moduleId));\r\n\r\n        (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q).then(querySnapshot => {\r\n            if (!querySnapshot.empty) {\r\n                resolve(querySnapshot.docs);\r\n            } else {\r\n                reject(\"No exams found in this module.\");\r\n            }\r\n        }).catch(error => {\r\n            reject(error);\r\n        });\r\n    });\r\n}\r\n\r\nfunction goToExam(examId) {\r\n    let currentUrl = new URL(window.location.href);\r\n    let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\\/[^/]+$/, '/');\r\n\r\n    let newRelativeUrl = \"exam.html\";\r\n    let newUrl = baseUrl + newRelativeUrl;\r\n\r\n    let urlObject = new URL(newUrl);\r\n    urlObject.searchParams.append('exam_id', examId);\r\n\r\n    window.location.href = urlObject.toString();\r\n}\r\n\r\nconst examsDiv = document.getElementById(\"exams\");\r\nconst exams = await getExamsFromModule(module_id);\r\nexams.forEach(exam => {\r\n    const examA = document.createElement(\"a\");\r\n    examA.href = \"#\";\r\n    examA.classList.add(\"div-a\")\r\n    examA.addEventListener(\"click\", async () => {\r\n        await goToExam(exam.id);\r\n    });\r\n\r\n\r\n    const examDiv = document.createElement(\"div\");\r\n    examDiv.classList.add(\"exam\");\r\n\r\n    const examTitle = document.createElement(\"h2\");\r\n    examTitle.textContent = exam.data().name;\r\n\r\n    const examDescription = document.createElement(\"p\");\r\n    examDescription.textContent = \"Lorem Ipsum\";\r\n\r\n    examDiv.appendChild(examTitle);\r\n    examDiv.appendChild(examDescription);\r\n\r\n    examA.appendChild(examDiv);\r\n    examsDiv.appendChild(examA);\r\n});\r\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack:///./src/student_module.js?");
 
 /***/ }),
 
@@ -187,6 +187,75 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
+/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
+/******/ 		var resolveQueue = (queue) => {
+/******/ 			if(queue && queue.d < 1) {
+/******/ 				queue.d = 1;
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 				if(dep[webpackQueues]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					var queue = [];
+/******/ 					queue.d = 0;
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						resolveQueue(queue);
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						resolveQueue(queue);
+/******/ 					});
+/******/ 					var obj = {};
+/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			var ret = {};
+/******/ 			ret[webpackQueues] = x => {};
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
+/******/ 		}));
+/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
+/******/ 			var queue;
+/******/ 			hasAwait && ((queue = []).d = -1);
+/******/ 			var depQueues = new Set();
+/******/ 			var exports = module.exports;
+/******/ 			var currentDeps;
+/******/ 			var outerResolve;
+/******/ 			var reject;
+/******/ 			var promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = resolve;
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 			module.exports = promise;
+/******/ 			body((deps) => {
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				var fn;
+/******/ 				var getResult = () => (currentDeps.map((d) => {
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
+/******/ 				var promise = new Promise((resolve) => {
+/******/ 					fn = () => (resolve(getResult));
+/******/ 					fn.r = 0;
+/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 				});
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
+/******/ 			queue && queue.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -232,7 +301,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/student_index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/student_module.js");
 /******/ 	
 /******/ })()
 ;

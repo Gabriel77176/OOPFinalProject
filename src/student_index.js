@@ -74,7 +74,6 @@ async function goToModule(moduleId) {
     let newUrl = baseUrl + newRelativeUrl;
 
     let urlObject = new URL(newUrl);
-    const user = await getUser();
     urlObject.searchParams.append('module_id', moduleId);
 
     window.location.href = urlObject.toString();
@@ -114,6 +113,7 @@ onAuthStateChanged(auth, async user2 => {
             const module = await getDoc(moduleRef);
             const moduleA = document.createElement("a");
             moduleA.href = "#";
+            moduleA.classList.add("div-a")
             moduleA.addEventListener("click", async () => {
                 await goToModule(module.id);
             });
@@ -121,7 +121,8 @@ onAuthStateChanged(auth, async user2 => {
             moduleDiv.classList.add("module");
             moduleDiv.innerHTML = `
         <h2>${module.data().name}</h2>
-        <p>${"Lorem Ipsum"}</p>
+        <p>${"Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic vero error unde incidunt. Qui velit excepturi, delectus quam eos maiores possimus distinctio reiciendis omnis ratione consectetur repellendus esse magni eligendi?</p>"}
+
     `;
             moduleA.appendChild(moduleDiv);
             modulesDiv.appendChild(moduleA);
