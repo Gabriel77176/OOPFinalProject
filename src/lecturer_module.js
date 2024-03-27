@@ -65,6 +65,7 @@ exams.forEach(exam => {
         await goToExam(exam.id);
     });
 
+    //const addDiv = document.getElementById("add-exam")
 
     const examDiv = document.createElement("div");
     examDiv.classList.add("exam");
@@ -79,7 +80,8 @@ exams.forEach(exam => {
     examDiv.appendChild(examDescription);
 
     examA.appendChild(examDiv);
-    examsDiv.appendChild(examA);
+    examsDiv.prepend(examA);
+
 });
 
 const button = document.getElementById("add-exam");
