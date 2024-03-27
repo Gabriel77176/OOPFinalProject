@@ -35,13 +35,14 @@ form.addEventListener("submit", async (event) => {
     const examDate = document.getElementById("exam-date").value;
     const examCoef = document.getElementById("exam-coef").value;
     const examDateTimestamp = Timestamp.fromDate(new Date(examDate));
-
+    const examDescription = document.getElementById("exam-description").value;
 
     const newExam = {
         name: examName,
         date: examDateTimestamp,
         coef: examCoef,
-        module_id: module_id
+        module_id: module_id,
+        description: examDescription
     };
 
     try {

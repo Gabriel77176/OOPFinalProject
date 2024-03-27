@@ -66,7 +66,7 @@ onAuthStateChanged(auth, async user2 => {
                     let options = {year: 'numeric', month: 'long', day: 'numeric'};
 
                     document.getElementById('name-span').textContent = examData.name;
-                    document.getElementById('description-span').textContent = "Lorem Ipsum"; // examData.description
+                    document.getElementById('description-span').textContent = examData.description; // examData.description
                     document.getElementById('coef-span').textContent = examData.coef;
                     document.getElementById('date-span').textContent = formattedDate;
 
