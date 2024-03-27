@@ -10,9 +10,26 @@ h1 {
     margin-right: -5px; /* Décalage légèrement vers la gauche */
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Utiliser au moins 100% de la hauteur de la fenêtre */
+    margin: 0; /* Supprimer les marges par défaut du corps */
+}
+
+nav {
+    flex: 0 0 auto; /* Ne pas faire étirer la barre de navigation */
+}
+
+main {
+    flex: 1; /* Faire en sorte que le contenu principal prenne tout l'espace restant */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
-    margin: 100px auto; /* Centrer le contenu verticalement */
-    max-width: 600px; /* Limite de la largeur du conteneur */
+    max-width: 600px;
     padding: 20px;
     background-color: #ECF8F6;
     border-radius: 8px;
@@ -75,4 +92,3 @@ h1 {
 .create-account-btn:hover {
     background-color: #18534F; /* Couleur au survol du bouton */
 }
-
