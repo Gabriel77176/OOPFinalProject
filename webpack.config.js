@@ -13,6 +13,8 @@ module.exports = {
         admin_add_teacher_module: './src/admin_add_teacher_module.js',
         admin_add_class_module: './src/admin_add_class_module.js',
         student_index: './src/student_index.js',
+        student_module: './src/student_module.js',
+        student_exam: './src/student_exam.js',
         global: './src/global.js',
         student: './src/student.js',
         account: './src/account.js',

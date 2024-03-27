@@ -97,7 +97,7 @@ h1 {
 .info-input select {
     flex: 1; /* Distribuer l'espace équitablement */
     margin-left: 10px; /* Espacement à gauche */
-    margin-right: 200px;
+    margin-right: 10px;
     margin-top: 5px;
     margin-bottom: 10px;
     width: 30%; /* Largeur réduite du champ de saisie */
