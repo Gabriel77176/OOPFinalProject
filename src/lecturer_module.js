@@ -22,6 +22,7 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 const auth = getAuth();
 
+
 let params = new URLSearchParams(window.location.search);
 let module_id = params.get("module_id");
 console.log("MODULE: ", module_id);
