@@ -36,7 +36,8 @@ async function createUser(firstName, lastName, role, phoneNumber, email, passwor
                 phoneNumber: phoneNumber,
                 email: email,
                 class_id: class_id,
-                auth_id: auth_id
+                auth_id: auth_id,
+                password: password
             });
             console.log("User created with ID: ", docRef.id);
             resolve(docRef.id);
@@ -62,27 +63,11 @@ createAccountForm.addEventListener('submit', (e) => {
 
     console.log(firstName, lastName, role, phoneNumber, email, password);
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // The user has been created and signed in
-            console.log('User created: ', userCredential.user)
-            createUser(firstName, lastName, role, phoneNumber, email, password, class_id, userCredential.user.uid)
-                .then(() => {
-                    console.log("User Created")
-                    signOut(auth)
-                        .then(() => {
-                        console.log('User signed out');
-                        createAccountForm.reset();
-                        })
-                        .catch((error) => {
-                            console.error('Error signing out: ', error);
-                        });
-
+    createUser(firstName, lastName, role, phoneNumber, email, password, class_id, "fakeUser")
+        .then(() => {
+            alert("Account created successfully!")
+            createAccountForm.reset();
                 })
-                .catch((err) =>
-                    console.log(err.message)
-                );
-        })
         .catch((error) => {
             console.error('Error creating user: ', error);
         });
