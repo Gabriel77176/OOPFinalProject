@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
-import {collection, getDocs, getFirestore} from "firebase/firestore";
+import {collection, getDocs, getFirestore, query, where} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,78 +25,27 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore();
 
-const moduleCollection = collection(db, 'module');
-
-const logoutButton = document.getElementById('logout');
-logoutButton.addEventListener('click', (e) => {
-  e.preventDefault();
-
-  signOut(auth)
-      .then(() => {
-        console.log('User signed out');
-        // window.location.href = 'login.html';
-      })
-      .catch((error) => {
-        console.error('Error signing out: ', error);
-      });
-});
-
-const userModuleForm = document.querySelector("#form_teacher_module");
-userModuleForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const moduleSelect = document.querySelector('select[name="module_id"]');
-  const selectedId = moduleSelect.value;
-
-  let currentUrl = new URL(window.location.href);
-  let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\/[^/]+$/, '/');
-
-  let newRelativeUrl = "admin/add_teacher_module.html";
-  let newUrl = baseUrl + newRelativeUrl;
-
-  let urlObject = new URL(newUrl);
-
-  urlObject.searchParams.append('module_id', selectedId);
-  window.location.href = urlObject.toString();
-});
-
-const classModuleForm = document.querySelector("#form_class_module");
-classModuleForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const moduleSelect = document.querySelector('select[name="module_id"]');
-  const selectedId = moduleSelect.value;
-
-  let currentUrl = new URL(window.location.href);
-  let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\/[^/]+$/, '/');
-
-  let newRelativeUrl = "admin/add_class_module.html";
-  let newUrl = baseUrl + newRelativeUrl;
-
-  let urlObject = new URL(newUrl);
-
-  urlObject.searchParams.append('module_id', selectedId);
-  window.location.href = urlObject.toString();
-});
-
-getDocs(moduleCollection).then((querySnapshot) => {
-  const moduleSelect = document.querySelector("#form_teacher_module_select");
-
-  querySnapshot.forEach((doc) => {
-    let option = document.createElement('option');
-    option.value = doc.id;
-    option.text = doc.data().name;
-    moduleSelect.add(option);
-  });
-});
-
-getDocs(moduleCollection).then((querySnapshot) => {
-  const moduleSelect = document.querySelector("#form_class_module_select");
-
-  querySnapshot.forEach((doc) => {
-    let option = document.createElement('option');
-    option.value = doc.id;
-    option.text = doc.data().name;
-    moduleSelect.add(option);
-  });
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const q = query(collection(db, "user"), where("auth_id", "==", user.uid));
+    getDocs(q).then((querySnapshot) => {
+      if (querySnapshot.size === 0) {
+        signOut(auth).then(r => {
+          console.log('No user found');
+          window.location.href = 'login.html';
+        });
+      } else {
+        const user = querySnapshot.docs[0].data();
+        if (user.role === 'admin') {
+          window.location.href = './admin/index.html';
+        } else if (user.role === 'student') {
+          window.location.href = './student/index.html';
+        } else {
+          window.location.href = './lecturer/index.html';
+        }
+      }
+    }); // Added closing parenthesis here
+  } else {
+    window.location = 'login.html';
+  }
 });
