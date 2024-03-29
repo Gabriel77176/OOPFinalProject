@@ -104,6 +104,10 @@ onAuthStateChanged(auth, async user2 => {
         modulesDiv.innerHTML = "";
 
         const user = await getUser();
+
+        const userTitle = document.getElementById("user-title");
+        userTitle.textContent = `Welcome, ${user.data().lastName + " " + user.data().firstName}`;
+
         const userModulesSnapshot = await getUserModules(user.data().class_id);
         console.log(user.data().class_id)
         const userModules = userModulesSnapshot.docs;
