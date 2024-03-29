@@ -36,14 +36,12 @@ form.addEventListener("submit", async (event) => {
     const courseTimeOut = document.getElementById("course-timeout").value;
     const courseDateTimestampIN = Timestamp.fromDate(new Date(courseTimeIn));
     const courseDateTimestampOUT = Timestamp.fromDate(new Date(courseTimeOut));
-    const courseDescription = document.getElementById("course-description").value;
 
     const newCourse = {
         name: courseName,
         time_in: courseDateTimestampIN,
         time_out: courseDateTimestampOUT,
         module_id: module_id,
-        description: courseDescription
     };
 
     try {

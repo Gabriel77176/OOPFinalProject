@@ -71,3 +71,21 @@ main {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.modifier-btn {
+    display: block;
+    margin: 20px auto; /* Centrer le bouton */
+    padding: 10px 20px;
+    background-color: #C5E0B5; /* Nouvelle couleur du bouton */
+    border: none;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.modifier-btn:hover {
+    background-color: #18534F; /* Couleur au survol du bouton */
+    color: #fff;
+}

@@ -37,6 +37,10 @@ button.addEventListener("click", () => {
     window.location.href = "add_exam.html?module_id=" + module_id;
 });
 
+const module = await getDoc(doc(db, "module", module_id));
+const moduleName = document.getElementById("module-title");
+moduleName.textContent = module.data().name;
+
 const examsDiv = document.getElementById("exams");
 const exams = await getExamsFromModule(module_id);
 exams.forEach(exam => {
@@ -68,7 +72,6 @@ exams.forEach(exam => {
 });
 
 
-
 const coursesDiv = document.getElementById("courses");
 const courses = await getCoursesFromModule(module_id);
 courses.forEach(course => {
@@ -87,16 +90,15 @@ courses.forEach(course => {
     courseTitle.textContent = course.data().name;
 
     const courseDescription = document.createElement("p");
-    courseDescription.textContent = course.data().description;
 
     const coursetime_in = document.createElement("p");
     const timeIn = course.data().time_in;
     const timeOut = course.data().time_out;
-    coursetime_in.textContent = "Time in: " + timeIn.toDate().toLocaleString();
+    coursetime_in.innerHTML = "<b>Time in:</b> " + timeIn.toDate().toLocaleString();
     courseDescription.appendChild(coursetime_in);
 
     const coursetime_out = document.createElement("p");
-    coursetime_out.textContent = "Time out: " + timeOut.toDate().toLocaleString();
+    coursetime_out.innerHTML = "<b>Time out:</b> " + timeOut.toDate().toLocaleString();
     courseDescription.appendChild(coursetime_out);
 
 
