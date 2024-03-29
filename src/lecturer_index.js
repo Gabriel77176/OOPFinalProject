@@ -112,12 +112,14 @@ onAuthStateChanged(auth, async user2 => {
             const moduleRef = doc(db, 'module', userModule.data().module_id);
             const module = await getDoc(moduleRef);
             const moduleA = document.createElement("a");
+            moduleA.classList.add("div-a");
             moduleA.href = "#";
             moduleA.addEventListener("click", async () => {
                 await goToModule(module.id);
             });
             const moduleDiv = document.createElement("div");
             moduleDiv.classList.add("module");
+            moduleDiv.classList.add("grid-div");
             moduleDiv.innerHTML = `
         <h2>${module.data().name}</h2>
         <p>${"Lorem Ipsum"}</p>

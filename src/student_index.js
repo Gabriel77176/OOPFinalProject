@@ -119,6 +119,7 @@ onAuthStateChanged(auth, async user2 => {
             });
             const moduleDiv = document.createElement("div");
             moduleDiv.classList.add("module");
+            moduleDiv.classList.add("grid-div");
             moduleDiv.innerHTML = `
         <h2>${module.data().name}</h2>
         <p>${"Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic vero error unde incidunt. Qui velit excepturi, delectus quam eos maiores possimus distinctio reiciendis omnis ratione consectetur repellendus esse magni eligendi?</p>"}
@@ -126,7 +127,6 @@ onAuthStateChanged(auth, async user2 => {
     `;
             moduleA.appendChild(moduleDiv);
             modulesDiv.appendChild(moduleA);
-
         }
     } else {
         console.log('No user is signed in');

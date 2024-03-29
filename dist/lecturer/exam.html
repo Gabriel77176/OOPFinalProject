@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="css/module.css">
+    <link rel="stylesheet" href="../css/details-style.css">
     <link rel="stylesheet" href="../css/nav-style.css">
 </head>
 <body>
@@ -20,13 +20,27 @@
         <a id="details-a" href="#"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
     </div>
 </nav>
+
 <main>
-    <h1><span id="name-span">0</span></h1>
-    <p>Description: <br><span id="description-span">0</span></p>
-    <p>Coef: <span id="coef-span">0</span></p>
-    <p>Date: <span id="date-span">0</span></p>
+    <div class="container" style="width: 500px;">
+        <h1><span id="name-span">0</span></h1>
+
+        <div class="info-row">
+            <label class="info-label" for="coef">Coef :</label>
+            <span id="coef-span" class="info-value"></span>
+        </div>
+        <div class="info-row">
+            <label class="info-label" for="coef">Date :</label>
+            <span id="date-span" class="info-value"></span>
+        </div>
+        <div class="info-row">
+            <label class="info-label" for="coef">Date :</label>
+            <br>
+            <span id="description-span" class="info-value"></span>
+        </div>
 
     <button id="modify">Modify</button>
+    </div>
 
 </main>
 <script src="../bundles/lecturer_exam.bundle.js"></script>

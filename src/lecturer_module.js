@@ -51,6 +51,7 @@ exams.forEach(exam => {
 
     const examDiv = document.createElement("div");
     examDiv.classList.add("exam");
+    examDiv.classList.add("grid-div");
 
     const examTitle = document.createElement("h2");
     examTitle.textContent = exam.data().name;
@@ -80,6 +81,7 @@ courses.forEach(course => {
 
     const courseDiv = document.createElement("div");
     courseDiv.classList.add("course");
+    courseDiv.classList.add("grid-div");
 
     const courseTitle = document.createElement("h2");
     courseTitle.textContent = course.data().name;

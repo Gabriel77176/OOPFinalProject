@@ -68,6 +68,7 @@ exams.forEach(exam => {
 
     const examDiv = document.createElement("div");
     examDiv.classList.add("exam");
+    examDiv.classList.add("grid-div");
 
     const examTitle = document.createElement("h2");
     examTitle.textContent = exam.data().name;
