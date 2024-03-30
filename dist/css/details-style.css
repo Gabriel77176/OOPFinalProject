@@ -70,6 +70,7 @@ main {
     background-color: #ECF8F6;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 500px;
 }
 
 .modifier-btn {
@@ -89,3 +90,21 @@ main {
     background-color: #18534F; /* Couleur au survol du bouton */
     color: #fff;
 }
+
+.table-style {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table-style th, .table-style td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-style th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.table-style tr:hover {background-color: #f5f5f5;}

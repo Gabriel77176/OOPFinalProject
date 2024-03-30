@@ -26,14 +26,6 @@ const userModuleCollection = collection(db, 'user_module');
 
 let globalUser = null;
 
-async function isConnected() {
-    return new Promise((resolve, reject) => {
-        while (globalUser) {
-            resolve(globalUser);
-        }
-    });
-}
-
 async function getUser() {
     return new Promise((resolve, reject) => {
         if (globalUser) {

@@ -6,41 +6,54 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="../css/nav-style.css">
+    <link rel="stylesheet" href="../css/module-style.css">
 </head>
 <body>
     <nav class="main-nav">
         <div class="nav-left centered">
-            <h1>OOP Final Exam</h1>
+            <a href="index.html"><h1>OOP Final Exam</h1></a>
         </div>
         <div class="nav-center centered">
-            <a href="./index.html">Home</a>
-            <a href="./create_account.html">Create Account</a>
-            <a href="./create_class.html">Create Class</a>
-            <a href="./create_module.html">Create Module</a>
         </div>
         <div class="nav-right centered">
             <span id="connect-p"></span>
-            <a href="../account.html"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
+            <a id="details-a" href="../account.html"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
         </div>
     </nav>
     <main>
-        <h1>Title</h1>
+        <div class="title">
+            <h1 id="user-title"></h1>
+        </div>
+        <!--
+        /// Modules (see - add)
+        /// Courses (see - add)
+        /// Classes (see - add)
+        /// Students (see - add)
+        /// Teachers (see - add)
+        -->
+        <h1 class="section-title">Modules</h1>
+        <div id="modules" class="grid">
+            <a href="./create_module.html" class="div-a" id="add-module"><div class="exam grid-div">
+                <h2>+</h2>
+            </div></a>
+        </div>
 
-        <a href="login.html">LOGIN</a>
-        <a href="#" id="logout">LOGOUT</a>
-        <br>
-        <a href="admin/create_account.html">CREATE USER</a>
-        <br>
-        <a href="admin/create_module.html">CREATE MODULE</a>
-        <br>
-        <a href="admin/create_class.html">CREATE CLASS</a>
-        <br>
-        <form id="form_class">
-            <select name="class_id" id="form_class_select">
-            </select>
-            <input type="submit" value="Add User to Class">
-        </form>
+        <h1 class="section-title">Classes</h1>
+        <div id="classes" class="grid">
+            <a href="./create_class.html" class="div-a" id="add-class"><div class="exam grid-div">
+                <h2>+</h2>
+            </div></a>
+        </div>
+
+        <h1 class="section-title">Lecturers</h1>
+        <div id="teachers" class="grid">
+            <a href="./lecturers.html" class="div-a"><div class="grid-div">
+                <h2>SEE</h2>
+            </div></a>
+        </div>
+
         <script src="../bundles/admin_global.bundle.js"></script>
+        <script src="../bundles/admin_index.bundle.js"></script>
     </main>
 </body>
 </html>

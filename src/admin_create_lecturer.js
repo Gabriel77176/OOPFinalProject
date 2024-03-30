@@ -26,16 +26,15 @@ const db = getFirestore();
 const userCollection = collection(db, "user");
 const classCollection = collection(db, "class");
 
-async function createUser(firstName, lastName, role, phoneNumber, email, password, class_id, auth_id) {
+async function createUser(firstName, lastName, phoneNumber, email, password, auth_id) {
     return new Promise(async (resolve, reject) => {
         try {
             const docRef = await addDoc(userCollection, {
                 firstName: firstName,
                 lastName: lastName,
-                role: role,
+                role: "lecturer",
                 phoneNumber: phoneNumber,
                 email: email,
-                class_id: class_id,
                 auth_id: auth_id,
                 password: password
             });
@@ -55,15 +54,13 @@ createAccountForm.addEventListener('submit', (e) => {
 
     const firstName = createAccountForm.first_name.value;
     const lastName = createAccountForm.last_name.value;
-    const role = createAccountForm.role.value;
     const phoneNumber = createAccountForm.phone_number.value;
     const email = createAccountForm.email.value;
     const password = createAccountForm.password.value;
-    const class_id = createAccountForm.class.value;
 
-    console.log(firstName, lastName, role, phoneNumber, email, password);
+    console.log(firstName, lastName, phoneNumber, email, password);
 
-    createUser(firstName, lastName, role, phoneNumber, email, password, class_id, "fakeUser")
+    createUser(firstName, lastName, phoneNumber, email, password, "fakeUser")
         .then(() => {
             alert("Account created successfully!")
             createAccountForm.reset();
@@ -72,24 +69,4 @@ createAccountForm.addEventListener('submit', (e) => {
         .catch((error) => {
             console.error('Error creating user: ', error);
         });
-});
-
-async function getClasses() {
-    const querySnapshot = await getDocs(classCollection);
-    const classes = querySnapshot.docs.map(doc => doc);
-    return classes;
-}
-
-getClasses().then(classes => {
-    const classSelect = document.querySelector("#class-select");
-    if (classes.length > 0)
-    {
-        classSelect.innerHTML = "";
-    }
-    classes.forEach(classItem => {
-        const option = document.createElement('option');
-        option.value = classItem.id;
-        option.text = classItem.data().name;
-        classSelect.add(option);
-    });
 });

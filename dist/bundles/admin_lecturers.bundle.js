@@ -50,13 +50,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/lecturer_index.js":
-/*!*******************************!*\
-  !*** ./src/lecturer_index.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./src/admin_lecturers.js":
+/*!********************************!*\
+  !*** ./src/admin_lecturers.js ***!
+  \********************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4\",\r\n    authDomain: \"oopfinalproject-1ad78.firebaseapp.com\",\r\n    projectId: \"oopfinalproject-1ad78\",\r\n    storageBucket: \"oopfinalproject-1ad78.appspot.com\",\r\n    messagingSenderId: \"10697858559\",\r\n    appId: \"1:10697858559:web:0eea452e24f9883f6e9bca\",\r\n    measurementId: \"G-2ZS6JBKR21\"\r\n};\r\n\r\n// Initialize Firebase\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)();\r\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)();\r\n\r\nconst userModuleCollection = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, 'user_module');\r\n\r\nlet globalUser = null;\r\n\r\nasync function getUser() {\r\n    return new Promise((resolve, reject) => {\r\n        if (globalUser) {\r\n            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"user\"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)(\"auth_id\", \"==\", globalUser.uid));\r\n\r\n            (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q).then(querySnapshot => {\r\n                if (!querySnapshot.empty) {\r\n                    resolve(querySnapshot.docs[0]);\r\n                } else {\r\n                    reject(\"User not found in database.\");\r\n                }\r\n            }).catch(error => {\r\n                reject(error);\r\n            });\r\n        } else {\r\n            reject(\"User not logged in, please log in first.\");\r\n        }\r\n    });\r\n}\r\n\r\nasync function getUserModules(userID) {\r\n    return new Promise((resolve, reject) => {\r\n        const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)(userModuleCollection, (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)(\"user_id\", \"==\", userID));\r\n\r\n        (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q).then(querySnapshot => {\r\n            resolve(querySnapshot);\r\n        }).catch(error => {\r\n            reject(error);\r\n        });\r\n    });\r\n}\r\n\r\nasync function goToModule(moduleId) {\r\n    let currentUrl = new URL(window.location.href);\r\n    let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\\/[^/]+$/, '/');\r\n\r\n    let newRelativeUrl = \"module.html\";\r\n    let newUrl = baseUrl + newRelativeUrl;\r\n\r\n    let urlObject = new URL(newUrl);\r\n    const user = await getUser();\r\n    urlObject.searchParams.append('module_id', moduleId);\r\n\r\n    window.location.href = urlObject.toString();\r\n}\r\n\r\nconst detailsButton = document.getElementById(\"details-a\");\r\ndetailsButton.addEventListener(\"click\", async () => {\r\n    console.log(\"details button clicked\");\r\n\r\n    let currentUrl = new URL(window.location.href);\r\n    let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\\/[^/]+$/, '/');\r\n\r\n    let newRelativeUrl = \"account.html\";\r\n    let newUrl = baseUrl + newRelativeUrl;\r\n\r\n    let urlObject = new URL(newUrl);\r\n    const user = await getUser();\r\n    urlObject.searchParams.append('user_id', user.id);\r\n\r\n    window.location.href = urlObject.toString();\r\n});\r\n\r\n\r\n(0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.onAuthStateChanged)(auth, async user2 => {\r\n    if (user2) {\r\n        globalUser = user2;\r\n        const modulesDiv = document.getElementById(\"modules\");\r\n        modulesDiv.innerHTML = \"\";\r\n\r\n        const user = await getUser();\r\n\r\n        const userTitle = document.getElementById(\"user-title\");\r\n        userTitle.textContent = `Welcome, ${user.data().lastName + \" \" + user.data().firstName}`;\r\n\r\n        const userModulesSnapshot = await getUserModules(user.id);\r\n        const userModules = userModulesSnapshot.docs;\r\n        console.log(userModules.length)\r\n        for (const userModule of userModules) {\r\n            const moduleRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)(db, 'module', userModule.data().module_id);\r\n            const module = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDoc)(moduleRef);\r\n            const moduleA = document.createElement(\"a\");\r\n            moduleA.classList.add(\"div-a\");\r\n            moduleA.href = \"#\";\r\n            moduleA.addEventListener(\"click\", async () => {\r\n                await goToModule(module.id);\r\n            });\r\n            const moduleDiv = document.createElement(\"div\");\r\n            moduleDiv.classList.add(\"module\");\r\n            moduleDiv.classList.add(\"grid-div\");\r\n            moduleDiv.innerHTML = `\r\n        <h2>${module.data().name}</h2>\r\n        <p>${\"Lorem Ipsum\"}</p>\r\n    `;\r\n            moduleA.appendChild(moduleDiv);\r\n            modulesDiv.appendChild(moduleA);\r\n\r\n        }\r\n    } else {\r\n        console.log('No user is signed in');\r\n    }\r\n});\n\n//# sourceURL=webpack:///./src/lecturer_index.js?");
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"./node_modules/firebase/auth/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\n\r\nconst firebaseConfig = {\r\n    apiKey: \"AIzaSyBgIykVwPcv67Qem8iiqEdS_D3Ms8F7Zf4\",\r\n    authDomain: \"oopfinalproject-1ad78.firebaseapp.com\",\r\n    projectId: \"oopfinalproject-1ad78\",\r\n    storageBucket: \"oopfinalproject-1ad78.appspot.com\",\r\n    messagingSenderId: \"10697858559\",\r\n    appId: \"1:10697858559:web:0eea452e24f9883f6e9bca\",\r\n    measurementId: \"G-2ZS6JBKR21\"\r\n};\r\n\r\n// Initialize Firebase\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)();\r\n\r\n// Query Firestore for users in the class\r\nconst q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(db, \"user\"), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.where)(\"role\", \"==\", \"lecturer\"));\r\nconst userQuerySnapshot = await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q);\r\n\r\n// Create table and populate with user data\r\nlet table = document.createElement('table');\r\nlet thead = document.createElement('thead');\r\nlet tbody = document.createElement('tbody');\r\n\r\n// Create table header\r\nlet headerRow = document.createElement('tr');\r\nlet nameHeader = document.createElement('th');\r\nnameHeader.textContent = 'Name';\r\nheaderRow.appendChild(nameHeader);\r\n\r\nlet emailHeader = document.createElement('th');\r\nemailHeader.textContent = 'Email';\r\nheaderRow.appendChild(emailHeader);\r\n\r\nthead.appendChild(headerRow);\r\ntable.appendChild(thead);\r\n\r\n// Populate table body with user data\r\nuserQuerySnapshot.forEach(doc => {\r\n    let user = doc.data();\r\n    let row = document.createElement('tr');\r\n\r\n    let nameCell = document.createElement('td');\r\n    nameCell.textContent = user.firstName + ' ' + user.lastName;\r\n    row.appendChild(nameCell);\r\n\r\n    let emailCell = document.createElement('td');\r\n    emailCell.textContent = user.email;\r\n    row.appendChild(emailCell);\r\n\r\n    tbody.appendChild(row);\r\n});\r\n\r\ntable.appendChild(tbody);\r\n\r\n// Append the table to a container in your HTML\r\nconst tableContainer = document.getElementById('userTableContainer');\r\nconsole.log(tableContainer);\r\ntableContainer.appendChild(table);\r\n\r\nconst addLecturerButton = document.getElementById('addLecturer');\r\naddLecturerButton.addEventListener('click', () => {\r\n    window.location.href = \"create_lecturer.html\";\r\n});\r\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } }, 1);\n\n//# sourceURL=webpack:///./src/admin_lecturers.js?");
 
 /***/ }),
 
@@ -187,6 +187,75 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/async module */
+/******/ 	(() => {
+/******/ 		var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
+/******/ 		var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 		var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
+/******/ 		var resolveQueue = (queue) => {
+/******/ 			if(queue && queue.d < 1) {
+/******/ 				queue.d = 1;
+/******/ 				queue.forEach((fn) => (fn.r--));
+/******/ 				queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 			}
+/******/ 		}
+/******/ 		var wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 			if(dep !== null && typeof dep === "object") {
+/******/ 				if(dep[webpackQueues]) return dep;
+/******/ 				if(dep.then) {
+/******/ 					var queue = [];
+/******/ 					queue.d = 0;
+/******/ 					dep.then((r) => {
+/******/ 						obj[webpackExports] = r;
+/******/ 						resolveQueue(queue);
+/******/ 					}, (e) => {
+/******/ 						obj[webpackError] = e;
+/******/ 						resolveQueue(queue);
+/******/ 					});
+/******/ 					var obj = {};
+/******/ 					obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 					return obj;
+/******/ 				}
+/******/ 			}
+/******/ 			var ret = {};
+/******/ 			ret[webpackQueues] = x => {};
+/******/ 			ret[webpackExports] = dep;
+/******/ 			return ret;
+/******/ 		}));
+/******/ 		__webpack_require__.a = (module, body, hasAwait) => {
+/******/ 			var queue;
+/******/ 			hasAwait && ((queue = []).d = -1);
+/******/ 			var depQueues = new Set();
+/******/ 			var exports = module.exports;
+/******/ 			var currentDeps;
+/******/ 			var outerResolve;
+/******/ 			var reject;
+/******/ 			var promise = new Promise((resolve, rej) => {
+/******/ 				reject = rej;
+/******/ 				outerResolve = resolve;
+/******/ 			});
+/******/ 			promise[webpackExports] = exports;
+/******/ 			promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 			module.exports = promise;
+/******/ 			body((deps) => {
+/******/ 				currentDeps = wrapDeps(deps);
+/******/ 				var fn;
+/******/ 				var getResult = () => (currentDeps.map((d) => {
+/******/ 					if(d[webpackError]) throw d[webpackError];
+/******/ 					return d[webpackExports];
+/******/ 				}))
+/******/ 				var promise = new Promise((resolve) => {
+/******/ 					fn = () => (resolve(getResult));
+/******/ 					fn.r = 0;
+/******/ 					var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 					currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 				});
+/******/ 				return fn.r ? promise : getResult();
+/******/ 			}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
+/******/ 			queue && queue.d < 0 && (queue.d = 0);
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -232,7 +301,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/lecturer_index.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/admin_lecturers.js");
 /******/ 	
 /******/ })()
 ;

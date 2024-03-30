@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="../css/nav-style.css">
+    <link rel="stylesheet" href="css/create_account.css">
+</head>
+<body style="background-image: url('img/imageback.jpg');">
+    <nav class="main-nav">
+        <div class="nav-left centered">
+            <h1>OOP Final Exam</h1>
+        </div>
+        <div class="nav-center centered">
+            <a href="index.html">Home</a>
+            <a href="create_account.html">Create Account</a>
+            <a href="create_class.html">Create Class</a>
+            <a href="create_module.html">Create Module</a>
+        </div>
+        <div class="nav-right centered">
+            <span id="connect-p"></span>
+            <a href="../login.html"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
+        </div>
+    </nav>
+    <main>
+        <div class="container" style="width: 500px;">
+            <div class="overlay"></div>
+            <h1>Create Account</h1>
+            <form method="post" id="create-account-form">
+                <div>
+                    <div class="info-label">First Name:</div>
+                    <div class="info-input">
+                        <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-label">Last Name:</div>
+                    <div class="info-input">
+                        <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-label">Email:</div>
+                    <div class="info-input">
+                        <input type="email" name="email" id="email" placeholder="Email" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-label">Password:</div>
+                    <div class="info-input">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-label">Phone Number:</div>
+                    <div class="info-input">
+                        <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" required>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="Create Account" class="create-account-btn">
+                </div>
+            </form>
+            
+        </div>
+        <script src="../bundles/admin_create_lecturer.bundle.js"></script>
+        <script src="../bundles/admin_global.bundle.js"></script>
+    </main>
+</body>
+</html>

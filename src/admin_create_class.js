@@ -48,6 +48,7 @@ createClassForm.addEventListener('submit', (e) => {
 
     createClass(name).then(() => {
         createClassForm.reset();
+        window.history.back();
     }).catch((e) => {
         console.error(e);
     });

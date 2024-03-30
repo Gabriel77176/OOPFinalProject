@@ -90,6 +90,7 @@ onAuthStateChanged(auth, user => {
                             const class_id = class_module.class_id;
                             console.log("class_id: " + class_id);
                             const table = document.createElement("table");
+                            table.classList.add("table-style");
                             const classRef2 = doc(db, "class", class_id);
                             console.log("classRef: " + classRef2);
                             const tbody = document.createElement("tbody");
@@ -195,10 +196,10 @@ onAuthStateChanged(auth, user => {
                             div.appendChild(table);
                         });
                         document.getElementById("save-button-1").style.display = "block";
-                        document.getElementById("save-button-2").style.display = "block";
                         button.style.display = "none";
                     });
                     button.textContent = "Edit";
+                    button.classList.add("modifier-btn");
                     div.appendChild(button);
                 });
 
@@ -218,9 +219,5 @@ onAuthStateChanged(auth, user => {
 
 const saveButton1 = document.getElementById("save-button-1");
 saveButton1.addEventListener("click", () => {
-    window.location.reload();
-});
-const saveButton2 = document.getElementById("save-button-2");
-saveButton2.addEventListener("click", () => {
     window.location.reload();
 });

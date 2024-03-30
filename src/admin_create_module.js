@@ -50,6 +50,7 @@ createModuleForm.addEventListener('submit', (e) => {
 
     createModule(name, coef).then(() => {
         createModuleForm.reset();
+        window.location.href = "index.html";
     }).catch((e) => {
         console.error(e);
     });
