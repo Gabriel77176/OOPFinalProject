@@ -131,3 +131,10 @@ onAuthStateChanged(auth, async user => {
     const userTitle = document.getElementById("user-title");
     userTitle.textContent = `Welcome, ${userCol.data().lastName + " " + userCol.data().firstName}`;
 });
+
+/* ******************************************************************************************************************** */
+/* ******************************************************************************************************************** */
+/* ******************************************************************************************************************** */
+
+import { stretchGridDivs } from './module_strech';
+stretchGridDivs();

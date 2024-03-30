@@ -117,7 +117,7 @@ exams.forEach(exam => {
     examTitle.textContent = exam.data().name;
 
     const examDescription = document.createElement("p");
-    examDescription.textContent = "Lorem Ipsum";
+    examDescription.textContent = exam.data().description;
 
     examDiv.appendChild(examTitle);
     examDiv.appendChild(examDescription);
@@ -164,3 +164,10 @@ onAuthStateChanged(auth, async (user) => {
         coursesDiv.appendChild(courseDiv);
     });
 });
+
+/* ******************************************************************************************************************** */
+/* ******************************************************************************************************************** */
+/* ******************************************************************************************************************** */
+
+import { stretchGridDivs } from './module_strech';
+stretchGridDivs();

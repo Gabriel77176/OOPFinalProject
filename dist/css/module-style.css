@@ -8,7 +8,6 @@ main {
     margin: 50px;
 }
 
-/* Styles pour la section des modules */
 .title {
     text-align: center; 
     margin-bottom: 40px; 
@@ -36,6 +35,38 @@ main {
 
 .grid-div {
     padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #ECF8F6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Remove the hover effect from here, it's unnecessary */
+.grid-div:hover {
+    background-color: #22d8ba;
+}
+
+.grid-div h2 {
+    margin-top: 0;
+    color: #18534F;
+}
+
+.grid-div p {
+    margin-top: 10px;
+    color: #226D68;
+}
+
+
+/*
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+
+.grid-div {
+    padding: 20px;
     border: 1px solid #ccc; 
     border-radius: 8px; 
     background-color: #ECF8F6; 
@@ -55,30 +86,9 @@ main {
     margin-top: 10px; 
     color: #226D68; 
 }
+*/
 
 .div-a {
     text-decoration: none;
     color: inherit;
 }
-
-/*
-
-.module {
-    width: 400px; 
-    padding: 20px; 
-    margin: 10px; 
-    border: 1px solid #ccc; 
-    border-radius: 8px; 
-    background-color: #ECF8F6; 
-}
-
-.module h2 {
-    margin-top: 0; 
-    color: #18534F; 
-}
-
-.module p {
-    margin-top: 10px; 
-    color: #226D68; 
-}
-*/
