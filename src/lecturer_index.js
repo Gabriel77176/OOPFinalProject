@@ -118,7 +118,7 @@ onAuthStateChanged(auth, async user2 => {
             moduleDiv.classList.add("grid-div");
             moduleDiv.innerHTML = `
         <h2>${module.data().name}</h2>
-        <p>${"Lorem Ipsum"}</p>
+        <p>${module.data().description}</p>
     `;
             moduleA.appendChild(moduleDiv);
             modulesDiv.appendChild(moduleA);

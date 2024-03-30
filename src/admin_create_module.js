@@ -25,12 +25,13 @@ const db = getFirestore();
 
 const moduleCollection = collection(db, "module");
 
-async function createModule(name, coef) {
+async function createModule(name, coef, description) {
     return new Promise(async (resolve, reject) => {
         try {
             const docRef = await addDoc(moduleCollection, {
                 name: name,
-                coef: coef
+                coef: coef,
+                description: description
             });
             console.log("User created with ID: ", docRef.id);
             resolve(docRef.id);
@@ -47,8 +48,9 @@ createModuleForm.addEventListener('submit', (e) => {
 
     const name = createModuleForm.name.value;
     const coef = createModuleForm.coef.value;
+    const description = createModuleForm.description.value;
 
-    createModule(name, coef).then(() => {
+    createModule(name, coef, description).then(() => {
         createModuleForm.reset();
         window.location.href = "index.html";
     }).catch((e) => {

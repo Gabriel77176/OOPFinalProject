@@ -62,6 +62,7 @@ main {
 }
 
 .info-input input,
+.info-input textarea,
 .info-input select {
     flex: 1; /* Distribuer l'espace équitablement */
     margin-left: 10px; /* Espacement à gauche */

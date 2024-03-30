@@ -47,3 +47,7 @@ body {
     margin-right: 5px; /* Ajout d'une marge à droite pour espacer le bouton de l'image */
 }
 
+.centered {
+    display: flex;
+    align-items: center;
+}

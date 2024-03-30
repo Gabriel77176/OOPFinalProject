@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Module</title>
     <link rel="stylesheet" href="../css/nav-style.css">
-    <link rel="stylesheet" href="css/create_module.css">
+    <link rel="stylesheet" href="./css/create_module.css">
 </head>
 <body style="background-image: url('img/imageback.jpg');">
         <nav class="main-nav">
@@ -20,7 +20,7 @@
         </div>
         <div class="nav-right centered">
             <span id="connect-p"></span>
-            <a href="../login.html"><img id="login-img" src="../img/icons/user-regular.svg" alt="LOGIN"></a>
+            <a href="../login.html"><img id="login-img" src="../img/user.png" alt="LOGIN"></a>
         </div>
     </nav>
     <main>
@@ -30,15 +30,21 @@
 
             <form method="post" id="create-module-form">
                 <div>
-                    <label for="class">Class Name :</label>
+                    <label>Class Name :</label>
                     <div class="info-input">
                         <input type="text" name="name" placeholder="Class Name" required>
                     </div>
                 </div>
                 <div>
-                    <label for="coef">Coef :</label>
+                    <label>Coef :</label>
                     <div class="info-input">
                         <input type="number" name="coef" placeholder="1" min="0" step="0.25" required>
+                    </div>
+                </div>
+                <div>
+                    <label>Description :</label>
+                    <div class="info-input">
+                        <textarea name="description" placeholder="Write your description here..." required></textarea>
                     </div>
                 </div>
                 <div>
