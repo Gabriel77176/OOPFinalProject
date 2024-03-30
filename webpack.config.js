@@ -33,6 +33,7 @@ module.exports = {
         student_module: './src/student_module.js',
         student_exam: './src/student_exam.js',
         student_global: './src/student_global.js',
+        lecturer_add_grade: './src/lecturer_add_grade.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

@@ -136,3 +136,17 @@ button.addEventListener('click', async () => {
     });
 });
 
+function GotoGrade(examId) {
+    let currentUrl = new URL(window.location.href);
+    let baseUrl = currentUrl.origin + currentUrl.pathname.replace(/\/[^/]+$/, '/');
+    let newRelativeUrl = "add_grade.html";
+    let newUrl = baseUrl + newRelativeUrl;
+    let urlObject = new URL(newUrl);
+    urlObject.searchParams.append('exam_id', examId);
+    window.location.href = urlObject.toString();
+}
+
+const gradeButton = document.getElementById('add-grade');
+gradeButton.addEventListener('click', async () => {
+    GotoGrade(exam_id);
+});
