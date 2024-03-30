@@ -48,15 +48,17 @@ const classModulesQuery = query(collection(db, "class_module"), where("module_id
 getDocs(classModulesQuery).then(querySnapshot => {
     querySnapshot.forEach(docu => {
         let classModule = docu.data();
-        getDoc(doc(db, "class", classModule.class_id)).then(classDoc => {
-            let classData = classDoc.data();
+        getDoc(doc(db, "class", classModule.class_id)).then(async classModuleDoc => {
             let row = document.createElement('tr');
 
             let nameCell = document.createElement('td');
-            nameCell.textContent = classData.name;
-            row.appendChild(nameCell);
+            const classDoc = await getDoc(doc(db, "class", classModule.class_id));
+            if (classDoc.exists()) {
+                nameCell.textContent = classDoc.data().name;
+                row.appendChild(nameCell);
 
-            classesTbody.appendChild(row);
+                classesTbody.appendChild(row);
+            }
         });
     });
 });
@@ -77,12 +79,12 @@ let lecturersThead = document.createElement('thead');
 let lecturersTbody = document.createElement('tbody');
 
 // Create table header
-let lecturersHheaderRow = document.createElement('tr');
+let lecturersHeaderRow = document.createElement('tr');
 let lecturersNameHeader = document.createElement('th');
 lecturersNameHeader.textContent = 'Name';
-lecturersHheaderRow.appendChild(lecturersNameHeader);
+lecturersHeaderRow.appendChild(lecturersNameHeader);
 
-lecturersThead.appendChild(lecturersHheaderRow);
+lecturersThead.appendChild(lecturersHeaderRow);
 lecturersTable.appendChild(lecturersThead);
 
 const userModulesQuery = query(collection(db, "user_module"), where("module_id", "==", module_id));
@@ -112,6 +114,8 @@ lecturersDiv.appendChild(lecturersTable);
 
 const addClassButton = document.getElementById("add-class");
 addClassButton.addEventListener("click", () => {
+    const buttonToDisable = document.getElementById("add-class");
+    buttonToDisable.disabled = true;
     let row = document.createElement('tr');
 
     let nameCell = document.createElement('td');
@@ -119,22 +123,22 @@ addClassButton.addEventListener("click", () => {
     let select = document.createElement('select');
 
     let classList = [];
+
     const classModulesQuery2 = query(collection(db, "class_module"), where("module_id", "==", module_id));
     getDocs(classModulesQuery2).then(querySnapshot => {
         querySnapshot.forEach(docu => {
             classList.push(docu.data().class_id);
-
-            const classQuery2 = query(collection(db, "class"));
-            getDocs(classQuery2).then(querySnapshot2 => {
-                querySnapshot2.forEach(docu2 => {
-                    if (!classList.includes(docu2.id)) {
-                        let classData = docu2.data();
-                        let option = document.createElement('option');
-                        option.value = classData.id;
-                        option.textContent = classData.name;
-                        select.appendChild(option);
-                    }
-                });
+            });
+        const classQuery2 = query(collection(db, "class"));
+        getDocs(classQuery2).then(querySnapshot2 => {
+            querySnapshot2.forEach(docu2 => {
+                if (!classList.includes(docu2.id)) {
+                    let classData = docu2.data();
+                    let option = document.createElement('option');
+                    option.value = docu2.id;
+                    option.textContent = classData.name;
+                    select.appendChild(option);
+                }
             });
         });
     });
@@ -164,5 +168,55 @@ addClassButton.addEventListener("click", () => {
 
 const addLecturerButton = document.getElementById("add-lecturer");
 addLecturerButton.addEventListener("click", () => {
-    // ...
+    const buttonToDisable = document.getElementById("add-lecturer");
+    buttonToDisable.disabled = true;
+    let row = document.createElement('tr');
+
+    let nameCell = document.createElement('td');
+    let form = document.createElement('form');
+    let select = document.createElement('select');
+
+    let lecturerList = [];
+
+    const lecturerModulesQuery2 = query(collection(db, "user_module"), where("module_id", "==", module_id));
+    getDocs(lecturerModulesQuery2).then(querySnapshot => {
+        querySnapshot.forEach(docu => {
+            lecturerList.push(docu.data().user_id);
+        });
+        console.log(lecturerList);
+        const lecturerQuery2 = query(collection(db, "user"), where("role", "==", "lecturer"));
+        getDocs(lecturerQuery2).then(querySnapshot2 => {
+            querySnapshot2.forEach(docu2 => {
+                if (!lecturerList.includes(docu2.id)) {
+                    let lecturerData = docu2.data();
+                    let option = document.createElement('option');
+                    option.value = docu2.id;
+                    option.textContent = lecturerData.firstName + ' ' + lecturerData.lastName;
+                    select.appendChild(option);
+                }
+            });
+        });
+    });
+
+    const formAddLecturerButton = document.createElement('button');
+    formAddLecturerButton.textContent = "Add";
+    formAddLecturerButton.setAttribute("type", "submit")
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        let user_id = select.value;
+        const userModule = {
+            user_id: user_id,
+            module_id: module_id
+        };
+        addDoc(collection(db, "user_module"), userModule).then(() => {
+            window.location.reload();
+        });
+    });
+
+    form.appendChild(select);
+    form.appendChild(formAddLecturerButton);
+    nameCell.appendChild(form);
+    row.appendChild(nameCell);
+
+    lecturersTbody.appendChild(row);
 });
